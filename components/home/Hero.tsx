@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import HeroFilter from "./HeroFilter";
 import HeroSearch from "./HeroSearch";
@@ -29,6 +28,7 @@ const Hero = () => {
         </h4>
 
         <HeroFilter />
+
         <HeroSearch />
       </div>
     </div>

@@ -22,7 +22,7 @@ const Card = ({
         <Image src={img} fill alt="agent picture " className="object-cover" />
       </div>
       <h4 className="font-semibold text-xl">{title}</h4>
-      <p>{body}</p>
+      <p className="text-justify">{body}</p>
 
       <Link href={url} className="text-gray-600 flex items-center gap-2">
         {urlTag} <ArrowRight size={18} />
@@ -36,15 +36,15 @@ const Body = () => {
     <div className=" max-w-6xl mx-auto mt-24">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-2 xl:px-0">
         <div className="order-2 sm:order-1 flex flex-col justify-between gap-4 ">
-          <h4 className="font-semibold text-2xl sm:3xl lg:text-5xl">
+          <h4 className="font-semibold text-2xl sm:3xl lg:text-4xl">
             Dedicated to the joy of home
           </h4>
-          <p>
-            Since 2020, i Obas as a Real Estate Agent has helped countless
-            families discover the joys of homeownership. In the process, we
-            built a reputation as the most respected brand in the industry.1 So
-            when it comes to buying or selling a place as important as home, put
-            your trust in a name trusted by millions.
+          <p className="text-justify">
+            Since 2020 <strong>IG OBAS</strong> Estate Agent has helped
+            countless families discover the joys of homeownership. In the
+            process, we built a reputation as the most respected brand in the
+            industry.1 So when it comes to buying or selling a place as
+            important as home, put your trust in a name trusted by millions.
           </p>
 
           <Link href={"#"} className="text-gray-600 flex items-center gap-2">
@@ -93,15 +93,34 @@ const Body = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-2 xl:px-0 mt-25">
-        <div className="order-2 sm:order-1 flex flex-col gap-4 ">
-          <h4 className="font-semibold text-2xl sm:3xl lg:text-5xl">
+        <div className="order-2 sm:order-1 flex flex-col gap-5 ">
+          <h4 className="font-semibold text-2xl sm:3xl lg:text-4xl">
             Registered and Compliant
           </h4>
-          <p className="text-lg">
-            IG OBAS & CO.LTD is duly registered with the Corporate Affairs
-            Commission (CAC) of Nigeria, in full compliance with all applicable
-            legal and regulatory requirements.
-          </p>
+          <div className="flex flex-col gap-3 text-justify">
+            <p>
+              <strong>IG OBAS & CO. LTD</strong> is officially registered with
+              the Corporate Affairs Commission (CAC) of Nigeria and operates in
+              full compliance with all national laws, regulations, and industry
+              standards. Our registration is a testament to our unwavering
+              commitment to transparency, accountability, and ethical business
+              conduct.
+            </p>
+            <p>
+              At <strong>IG OBAS & CO. LTD</strong>, we prioritize the highest
+              standards of corporate governance, ensuring that every aspect of
+              our operations—from financial management to client engagement—is
+              conducted responsibly and with integrity.
+            </p>
+            <p className="">
+              By adhering strictly to regulatory requirements, we provide our
+              clients, partners, and stakeholders with absolute confidence in
+              our professionalism, reliability, and dedication to excellence.
+              Our compliance is not just a legal obligation—it reflects our core
+              values and our promise to deliver services with trustworthiness,
+              fairness, and uncompromising ethical standards.
+            </p>
+          </div>
         </div>
         <div className="relative w-full aspect-5/6 order-1 sm:order-2">
           <Image

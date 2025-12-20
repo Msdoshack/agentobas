@@ -1,18 +1,17 @@
 "use client";
 import { PROPERTY_FILTER_ENUM, URLS } from "@/constants/enum";
 import { Search } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 const HeroSearch = () => {
   const [searchValue, setSearchValue] = useState("");
 
-  const searchParams = useSearchParams();
   const router = useRouter();
 
   const handleSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const params = new URLSearchParams(searchParams);
+
     if (searchValue) {
       router.push(
         `${URLS.propertiesPage}?${

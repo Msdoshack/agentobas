@@ -7,6 +7,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import Calendar from "react-calendar";
+import Clock from "../Clock";
 
 const footerMenu = [
   {
@@ -75,6 +76,7 @@ const contact = [
     img: "/email.png",
   },
 ];
+
 const Footer = () => {
   return (
     <div className="p-5 py-16 bg-slate-900 text-white">
@@ -84,7 +86,8 @@ const Footer = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-y-12 mt-8">
-          <div className=" bg-blue-200 text-black p-4 rounded-md">
+          <div className=" bg-slate-800 text-white p-4 rounded-md decoration-none">
+            <Clock />
             <Calendar locale="en-NG" value={new Date()} />
           </div>
 

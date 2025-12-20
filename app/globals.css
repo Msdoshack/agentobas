@@ -127,5 +127,5 @@
 }
 
 .react-calendar__tile--active {
-  @apply bg-slate-800 text-white rounded-sm;
+  @apply bg-amber-600 text-white rounded-sm;
 }
