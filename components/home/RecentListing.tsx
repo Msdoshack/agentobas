@@ -8,10 +8,7 @@ const RecentListing = () => {
     <div className="mt-16 max-w-6xl mx-auto px-1">
       <div className="flex items-center justify-between mb-4 px-1">
         <h3 className="font-medium text-lg sm:text-xl text-gray-700 ">
-          Recent Listing -{" "}
-          <span className="text-base text-gray-600">
-            Homes for sale in abraka
-          </span>
+          Recent Listing
         </h3>
         <Link href={URLS.propertiesPage} className=" text-gray-700">
           View all

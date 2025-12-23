@@ -1,3 +1,5 @@
+import { PROPERTY_CATEGORY_ENUM, URLS } from "./enum";
+
 export const PROPERTY_TYPE = ["all", "rent", "sale"];
 
 export const PROPERT_CATEGORIES = ["all", "house", "land", "office", "shop"];
@@ -9,7 +11,7 @@ export const properties = [
     price: 850000,
     type: "sale",
     category: "land",
-    address: "123 Skyline Ave, Downtown",
+    address: "opposite campus 3",
     beds: 3,
     baths: 2.5,
     sqft: 2400,
@@ -23,7 +25,7 @@ export const properties = [
     price: 3500,
     type: "rent",
     category: "house",
-    address: "456 Heritage Lane, Old Town",
+    address: "Bembo",
     beds: 4,
     baths: 3,
     sqft: 3200,
@@ -37,7 +39,7 @@ export const properties = [
     price: 1200000,
     type: "sale",
     category: "house",
-    address: "789 Marina Blvd, Waterfront",
+    address: "Campus 2 road",
     beds: 2,
     baths: 2,
     sqft: 1800,
@@ -50,7 +52,7 @@ export const properties = [
     title: "Contemporary Family Estate",
     price: 4200,
     type: "rent",
-    address: "321 Oak Valley Dr, Suburbs",
+    address: "N.U.T",
     beds: 5,
     baths: 4,
     category: "house",
@@ -65,7 +67,7 @@ export const properties = [
     price: 2800,
     type: "rent",
     category: "land",
-    address: "555 Arts District, Creative Quarter",
+    address: "Ivie road",
     beds: 1,
     baths: 1,
     sqft: 950,
@@ -80,7 +82,7 @@ export const properties = [
     price: 2100000,
     type: "sale",
     category: "house",
-    address: "888 Estate Row, Prestigious Hills",
+    address: "Okpogoro",
     beds: 6,
     baths: 5.5,
     sqft: 6800,
@@ -93,7 +95,7 @@ export const properties = [
     title: "Elegant Colonial Mansion",
     price: 2100000,
     type: "sale",
-    category: "house",
+    category: "lucas",
     address: "888 Estate Row, Prestigious Hills",
     beds: 3,
     baths: 5.5,
@@ -107,7 +109,7 @@ export const properties = [
     title: "Elegant Colonial Mansion",
     price: 2100000,
     type: "sale",
-    category: "house",
+    category: "Rivers road",
     address: "888 Estate Row, Prestigious Hills",
     beds: 4,
     baths: 5.5,
@@ -115,5 +117,36 @@ export const properties = [
     description:
       "Grand estate featuring marble floors, wine cellar, home theater, tennis court, and manicured gardens.",
     images: ["/properties/8.webp"],
+  },
+];
+
+export const navMenu = [
+  {
+    id: 1,
+    name: "Home page",
+    url: `${URLS.homePage}`,
+  },
+  {
+    id: 2,
+    name: "Land",
+    url: `${URLS.propertiesPage}?category=${PROPERTY_CATEGORY_ENUM.LAND}`,
+  },
+
+  {
+    id: 3,
+    name: "House",
+    url: `${URLS.propertiesPage}?category=${PROPERTY_CATEGORY_ENUM.HOUSE}`,
+  },
+
+  {
+    id: 4,
+    name: "Shops",
+    url: `${URLS.propertiesPage}?category=${PROPERTY_CATEGORY_ENUM.SHOP}`,
+  },
+
+  {
+    id: 5,
+    name: "All properties",
+    url: `${URLS.propertiesPage}?category=${PROPERTY_CATEGORY_ENUM.ALL}`,
   },
 ];

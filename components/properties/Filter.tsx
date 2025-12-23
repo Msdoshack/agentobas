@@ -79,8 +79,8 @@ const Filter = () => {
         </div>
 
         <Select
+          value={filterCategory}
           onValueChange={(e) => handleCategory(e as PROPERTY_CATEGORY_ENUM)}
-          defaultValue={filterCategory}
         >
           <SelectTrigger className="w-45 py-5! capitalize">
             <SelectValue placeholder="Select Category" />

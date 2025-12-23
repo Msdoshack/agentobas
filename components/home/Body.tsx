@@ -24,9 +24,9 @@ const Card = ({
       <h4 className="font-semibold text-xl">{title}</h4>
       <p className="text-justify">{body}</p>
 
-      <Link href={url} className="text-gray-600 flex items-center gap-2">
+      {/* <Link href={url} className="text-gray-600 flex items-center gap-2">
         {urlTag} <ArrowRight size={18} />
-      </Link>
+      </Link> */}
     </div>
   );
 };
@@ -61,7 +61,7 @@ const Body = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-24">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 gap-y-16 mt-24">
         <Card
           body="Nothing beats working with a buyer's agent who can help you navigate the nuances of buying a home in your local market. From the first look to the final step, let a CENTURY 21® independent agent be there for you through every moment of the homebuying process."
           img="/buy.webp"
@@ -132,13 +132,49 @@ const Body = () => {
         </div>
       </div>
 
-      <div className="bg-slate-900 text-white my-16 px-6 py-12">
-        <div className="max-w-7xl mx-auto text-center">
+      <div className="bg-linear-to-r from-gray-900 to-gray-950 text-white my-16 px-6 py-12 mx-2">
+        <div className="max-w-7xl mx-auto text-center ">
+          <h3 className="text-2xl font-bold mb-8 text-center">
+            Meet Your Agent
+          </h3>
+          <div className="flex flex-col md:flex-row gap-5">
+            <div className="w-full md:w-1/2 order-2 md:order-1 ">
+              <p className="text-justify px-4 text-lg">
+                I&apos;m <strong>Ichani Gift Obas, </strong> a passionate real
+                estate agent who believes that property ownership should be
+                simple, transparent, and rewarding. I work closely with my
+                clients to understand their needs and match them with the right
+                homes and investment opportunities. Whether you&apos;re buying,
+                selling, or investing, I&apos;m committed to providing
+                professional guidance, clear communication, and dependable
+                support from start to finish.
+              </p>
+            </div>
+            <div className="relative  h-80 aspect-9/6 order-1 md:order-2">
+              <Image
+                src={"/obas.jpg"}
+                alt="Agent obas"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-slate-900 text-white my-16 px-6 py-12 mx-2 relative">
+        <Image
+          src={"/home-image-800.webp"}
+          fill
+          alt="img"
+          className="opacity-10 object-cover"
+        />
+        <div className="max-w-7xl mx-auto text-center ">
           <h3 className="text-2xl font-bold mb-4">
             Ready to Find Your Dream Home?
           </h3>
 
-          <p className="text-slate-400 mb-6">
+          <p className="text-slate-300 mb-6">
             Contact us today for personalized service and expert guidance
           </p>
 
