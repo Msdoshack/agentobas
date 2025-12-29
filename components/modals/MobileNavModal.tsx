@@ -3,6 +3,7 @@ import { navMenu } from "@/constants";
 import { useRouter } from "next/navigation";
 import { RefObject } from "react";
 import { motion } from "motion/react";
+import Link from "next/link";
 
 type PropsType = {
   ref: RefObject<HTMLDivElement | null>;
@@ -37,6 +38,13 @@ const MobileNavModal = ({ ref, onClose }: PropsType) => {
             {item.name}
           </p>
         ))}
+
+        <p
+          onClick={() => handleClick("/admin")}
+          className="p-5 text-green-600 hover:bg-gray-900 hover:text-white hover:font-medium text-center border-b"
+        >
+          Admin
+        </p>
       </div>
     </motion.div>
   );

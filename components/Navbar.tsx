@@ -1,3 +1,4 @@
+import Link from "next/link";
 import MobileNavIcon from "./MobileNavIcon";
 import Logo from "./home/Logo";
 
@@ -12,6 +13,13 @@ const Navbar = () => {
         </div>
 
         <MobileNavIcon />
+
+        <Link
+          href={"/admin"}
+          className="p-1 px-3 rounded-md text-green-600 hover:bg-gray-900 hover:text-white hover:font-medium hidden md:block bg-white"
+        >
+          Admin
+        </Link>
 
         {/* <div>
           <Button variant={"link"} className="text-white">

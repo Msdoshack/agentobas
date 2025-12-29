@@ -6,7 +6,21 @@ export enum EXTERNAL_URLS {
 
 export enum URLS {
   homePage = "/",
+
   propertiesPage = "/properties",
+
+  adminPage = "/admin",
+  propertyDetailsPage = "/admin/properties",
+  addPropertyPage = "/admin/properties/add",
+  updatePropertyPage = "/admin/properties/update",
+
+  allCategoryPage = "/admin/categories",
+  addCategoryPage = "/admin/categories/add",
+  updateCategoryPage = "/admin/categories/update",
+
+  allTypePage = "/admin/types",
+  addTypePage = "/admin/types/add",
+  updateTypePage = "/admin/types/update",
 }
 
 export enum PROPERTY_TYPE_ENUM {

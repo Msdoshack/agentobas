@@ -1,5 +1,5 @@
 export interface Property {
-  id: number;
+  id: string;
   title: string;
   price: number;
   type: string;
@@ -10,4 +10,5 @@ export interface Property {
   sqft: number;
   description: string;
   images: string[];
+  isAvailable: boolean;
 }

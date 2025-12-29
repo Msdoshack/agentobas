@@ -5,7 +5,6 @@ import {
   Bath,
   Bed,
   LucideProps,
-  Mail,
   MapPin,
   Phone,
   Square,
@@ -45,9 +44,7 @@ const page = async ({
 }) => {
   const { propertyId } = await params;
 
-  const property = properties.find(
-    (property) => property.id === parseInt(propertyId)
-  );
+  const property = properties.find((property) => property.id === propertyId);
 
   return (
     <div className="min-h-screen bg-gray-50">

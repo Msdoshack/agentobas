@@ -57,21 +57,21 @@ const Filter = () => {
         <div className="flex gap-3 flex-wrap">
           {PROPERTY_TYPE.map((type) => (
             <button
-              key={type}
-              onClick={() => handleType(type as PROPERTY_TYPE_ENUM)}
+              key={type.id}
+              onClick={() => handleType(type.name as PROPERTY_TYPE_ENUM)}
               className={cn(
                 "py-3 px-6 rounded-md font-semibold border-none transition-all",
-                filterType === type
+                filterType === type.name
                   ? "bg-linear-to-r from-[#2563eb] to-[#1d4ed8]"
                   : "bg-white",
-                filterType === type ? "text-white" : "text-neutral-600",
+                filterType === type.name ? "text-white" : "text-neutral-600",
 
-                filterType === type ? "shadow-lg" : "none"
+                filterType === type.name ? "shadow-lg" : "none"
               )}
             >
-              {type === "all"
+              {type.name === "all"
                 ? "All Properties"
-                : type === "sale"
+                : type.name === "sale"
                 ? "For Sale"
                 : "For Rent"}
             </button>
@@ -90,8 +90,12 @@ const Filter = () => {
               <SelectLabel>Category</SelectLabel>
 
               {PROPERT_CATEGORIES.map((item) => (
-                <SelectItem key={item} value={item} className="capitalize">
-                  {item}
+                <SelectItem
+                  key={item.id}
+                  value={item.name}
+                  className="capitalize"
+                >
+                  {item.name}
                 </SelectItem>
               ))}
             </SelectGroup>
