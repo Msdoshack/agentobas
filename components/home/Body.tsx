@@ -2,6 +2,7 @@ import { EXTERNAL_URLS } from "@/constants/enum";
 import { ArrowRight, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import LandDeals from "./LandDeals";
 
 const Card = ({
   title,
@@ -60,6 +61,8 @@ const Body = () => {
           />
         </div>
       </div>
+
+      <LandDeals />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 gap-y-16 mt-24">
         <Card
@@ -132,8 +135,14 @@ const Body = () => {
         </div>
       </div>
 
-      <div className="bg-linear-to-r from-gray-900 to-gray-950 text-white my-16 px-6 py-12 mx-2">
-        <div className="max-w-7xl mx-auto text-center ">
+      <div className="bg-linear-to-r from-gray-900 to-gray-950 text-white my-16 px-6 py-12 mx-2 relative">
+        <Image
+          src={"/home-image-800.webp"}
+          className="opacity-10 object-cover"
+          alt="img"
+          fill
+        />
+        <div className="max-w-7xl mx-auto text-center">
           <h3 className="text-2xl font-bold mb-8 text-center">
             Meet Your Agent
           </h3>
@@ -150,12 +159,12 @@ const Body = () => {
                 support from start to finish.
               </p>
             </div>
-            <div className="relative  h-80 aspect-9/6 order-1 md:order-2">
+            <div className="relative  h-80 aspect-9/6 order-1 md:order-2 ">
               <Image
                 src={"/obas.jpg"}
                 alt="Agent obas"
                 fill
-                className="object-cover"
+                className="object-cover z-10"
               />
             </div>
           </div>

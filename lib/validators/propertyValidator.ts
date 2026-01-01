@@ -44,4 +44,4 @@ export const updatePropertySchema = z.object({
 // Types
 export type PropertyFormValues = z.infer<typeof addPropertySchema>;
 
-export type UpdateProductFormValues = z.infer<typeof updatePropertySchema>;
+export type UpdatePropertyFormValues = z.infer<typeof updatePropertySchema>;

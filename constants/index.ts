@@ -112,7 +112,7 @@ export const properties = [
     title: "Elegant Colonial Mansion",
     price: 2100000,
     type: "sale",
-    category: "lucas",
+    category: "house",
     address: "888 Estate Row, Prestigious Hills",
     beds: 3,
     baths: 5.5,
@@ -127,7 +127,7 @@ export const properties = [
     title: "Elegant Colonial Mansion",
     price: 2100000,
     type: "sale",
-    category: "Rivers road",
+    category: "house",
     address: "888 Estate Row, Prestigious Hills",
     beds: 4,
     baths: 5.5,
@@ -145,6 +145,31 @@ export const navMenu = [
     name: "Home page",
     url: `${URLS.homePage}`,
   },
+  {
+    id: 2,
+    name: "Land",
+    url: `${URLS.propertiesPage}?category=${PROPERTY_CATEGORY_ENUM.LAND}`,
+  },
+
+  {
+    id: 3,
+    name: "House",
+    url: `${URLS.propertiesPage}?category=${PROPERTY_CATEGORY_ENUM.HOUSE}`,
+  },
+
+  {
+    id: 4,
+    name: "Shops",
+    url: `${URLS.propertiesPage}?category=${PROPERTY_CATEGORY_ENUM.SHOP}`,
+  },
+
+  {
+    id: 5,
+    name: "All properties",
+    url: `${URLS.propertiesPage}?category=${PROPERTY_CATEGORY_ENUM.ALL}`,
+  },
+];
+export const navDesktopMenu = [
   {
     id: 2,
     name: "Land",

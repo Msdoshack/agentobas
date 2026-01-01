@@ -131,17 +131,17 @@ export const columns: ColumnDef<Property>[] = [
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(String(property.id))}
             >
-              Copy ProductId
+              Copy PropertyId
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <Link href={`${URLS.propertyDetailsPage}/${property.id}`}>
-                View Product details
+                View Property details
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Link href={`${URLS.updatePropertyPage}/${property.id}`}>
-                Update Product
+                Update Property
               </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
