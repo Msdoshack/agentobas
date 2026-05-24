@@ -1,5 +1,6 @@
 import Body from "@/components/home/Body";
 import Hero from "@/components/home/Hero";
+import LandDeals from "@/components/home/LandDeals";
 import RecentListing from "@/components/home/RecentListing";
 
 export default function Home() {
@@ -8,6 +9,9 @@ export default function Home() {
       <main>
         <Hero />
         <RecentListing />
+
+        <LandDeals />
+
         <Body />
       </main>
     </div>

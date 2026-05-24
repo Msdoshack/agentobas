@@ -19,7 +19,7 @@ const PropertyCard = ({ property, isGrid = true }: PropsType) => {
     <div
       className={cn(
         "bg-white rounded-md shadow-lg cursor-pointer transition-all hover:transform hover:-translate-y-2",
-        !isGrid && "min-w-80 flex-nowrap",
+        !isGrid && "min-w-56 flex-nowrap",
       )}
     >
       <div className="relative h-56 flex items-center justify-center">

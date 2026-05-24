@@ -36,19 +36,19 @@ const footerMenu = [
 const quickLinksMenu = [
   {
     id: 1,
-    title: "Lands for sale",
+    title: "Lands",
     url: `${URLS.propertiesPage}?type=${PROPERTY_TYPE_ENUM.SALE}&category=${PROPERTY_CATEGORY_ENUM.LAND}`,
   },
 
   {
     id: 2,
-    title: "Houses for sale",
+    title: "Houses",
     url: `${URLS.propertiesPage}?type=${PROPERTY_TYPE_ENUM.SALE}&category=${PROPERTY_CATEGORY_ENUM.HOUSE}`,
   },
 
   {
     id: 3,
-    title: "Rent Apartment",
+    title: "Shops",
     url: `${URLS.propertiesPage}?type=${PROPERTY_TYPE_ENUM.RENT}&category=${PROPERTY_CATEGORY_ENUM.HOUSE}`,
   },
 
@@ -92,6 +92,9 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-col gap-5 sm:items-center">
+            <h1 className="font-medium underline underline-offset-8">
+              Quick Links
+            </h1>
             {footerMenu.map((item) => (
               <Link href={item.url} key={item.id}>
                 {item.title}
@@ -100,6 +103,9 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-col gap-5 sm:items-center">
+            <h1 className="font-medium underline underline-offset-8">
+              Properties
+            </h1>
             {quickLinksMenu.map((item) => (
               <Link href={item.url} key={item.id}>
                 {item.title}

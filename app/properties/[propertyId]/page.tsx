@@ -12,7 +12,7 @@ import {
   MapPin,
   Phone,
 } from "lucide-react";
-
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
@@ -40,7 +40,51 @@ const InfoCard = ({
     </div>
   );
 };
+type Props = {
+  params: Promise<{ propertyId: string }>;
+};
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { propertyId } = await params;
+
+  try {
+    const response = await propertiesApi.get(propertyId);
+    const property = response.data;
+
+    if (!property) {
+      return { title: "Property Not Found" };
+    }
+
+    // Safely look for the first image URL if it exists in the array string slice
+    const ogImage =
+      property.images && property.images.length > 0
+        ? property.images[0].url
+        : "/fallback-og.png";
+
+    return {
+      title: property.title,
+      description:
+        property.description || "View details for this premium listing.",
+      openGraph: {
+        title: property.title,
+        description: property.description,
+        type: "website",
+        images: [
+          {
+            url: ogImage,
+            width: 1200,
+            height: 630,
+            alt: property.title,
+          },
+        ],
+      },
+    };
+  } catch (error) {
+    return {
+      title: "Property Details",
+    };
+  }
+}
 const page = async ({
   params,
 }: {
@@ -48,7 +92,6 @@ const page = async ({
 }) => {
   const { propertyId } = await params;
 
-  // const property = properties.find((property) => property.id === propertyId);
   const property = (await propertiesApi.get(propertyId)).data;
 
   return (

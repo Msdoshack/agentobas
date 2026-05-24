@@ -19,11 +19,11 @@ const Card = ({
 }) => {
   return (
     <div className="flex flex-col gap-4 px-2 xl:px-0">
-      <div className="relative h-80">
+      <div className="relative h-80 order-2 md:order-1">
         <Image src={img} fill alt="agent picture " className="object-cover" />
       </div>
-      <h4 className="font-semibold text-xl">{title}</h4>
-      <p className="text-justify">{body}</p>
+      <h4 className="font-semibold text-xl order-1 md:order-2">{title}</h4>
+      <p className="text-justify order-3">{body}</p>
 
       {/* <Link href={url} className="text-gray-600 flex items-center gap-2">
         {urlTag} <ArrowRight size={18} />
@@ -35,22 +35,37 @@ const Card = ({
 const Body = () => {
   return (
     <div className=" max-w-6xl mx-auto mt-24 lg:mt-32">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-2 xl:px-0">
+      <Link href={"#"} className="text-gray-600 flex items-center gap-2 px-2">
+        About Us{/*  <ArrowRight size={18} /> */}
+      </Link>
+      <h4 className="font-semibold text-2xl sm:3xl lg:text-4xl mb-8 px-2">
+        Dedicated to the joy of home
+      </h4>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-2 xl:px-0">
         <div className="order-2 sm:order-1 flex flex-col justify-between gap-4 ">
-          <h4 className="font-semibold text-2xl sm:3xl lg:text-4xl">
+          {/* <h4 className="font-semibold text-2xl sm:3xl lg:text-4xl">
             Dedicated to the joy of home
-          </h4>
-          <p className="text-justify">
+          </h4> */}
+          <p className="text-justify leading-9">
+            Since 2020, <strong>IG OBAS Estate Agent</strong> has helped
+            countless families discover the joys of homeownership. In the
+            process, we built a reputation as the most respected brand in the
+            industry. So when it comes to buying or selling a place as important
+            as home, put your trust in a name trusted by millions. Whether you
+            are stepping onto the property ladder for the first time, expanding
+            for a growing family, or listing a cherished estate, we bring
+            unmatched dedication to your table. Your peace of mind is our
+            blueprint. Let us navigate the complexities of the real estate
+            market for you, ensuring your next move is your best move.
+          </p>
+          {/* <p className="text-justify leading-10">
             Since 2020 <strong>IG OBAS</strong> Estate Agent has helped
             countless families discover the joys of homeownership. In the
             process, we built a reputation as the most respected brand in the
             industry.1 So when it comes to buying or selling a place as
             important as home, put your trust in a name trusted by millions.
-          </p>
-
-          <Link href={"#"} className="text-gray-600 flex items-center gap-2">
-            About Us <ArrowRight size={18} />
-          </Link>
+          </p> */}
         </div>
         <div className="relative h-80 order-1 sm:order-2">
           <Image
@@ -61,8 +76,8 @@ const Body = () => {
           />
         </div>
       </div>
-
-      <LandDeals />
+      {/* 
+      <LandDeals /> */}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 gap-y-16 mt-24 lg:mt-32">
         <Card
@@ -95,13 +110,13 @@ const Body = () => {
         />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-2 xl:px-0 mt-24 lg:mt-32">
-        <div className="order-2 sm:order-1 flex flex-col gap-5 ">
-          <h4 className="font-semibold text-2xl sm:3xl lg:text-4xl">
-            Registered and Compliant
-          </h4>
+      <h4 className="font-semibold text-2xl sm:3xl lg:text-4xl mt-24 lg:mt-32 mb-8">
+        Registered and Compliant
+      </h4>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-2 xl:px-0 ">
+        <div className="order-2 md:order-1 flex flex-col gap-5 ">
           <div className="flex flex-col gap-3 text-justify">
-            <p>
+            <p className="leading-8">
               <strong>IG OBAS & CO. LTD</strong> is officially registered with
               the Corporate Affairs Commission (CAC) of Nigeria and operates in
               full compliance with all national laws, regulations, and industry
@@ -109,13 +124,13 @@ const Body = () => {
               commitment to transparency, accountability, and ethical business
               conduct.
             </p>
-            <p>
+            <p className="leading-8">
               At <strong>IG OBAS & CO. LTD</strong>, we prioritize the highest
               standards of corporate governance, ensuring that every aspect of
               our operations—from financial management to client engagement—is
               conducted responsibly and with integrity.
             </p>
-            <p className="">
+            <p className="leading-8">
               By adhering strictly to regulatory requirements, we provide our
               clients, partners, and stakeholders with absolute confidence in
               our professionalism, reliability, and dedication to excellence.
@@ -125,7 +140,7 @@ const Body = () => {
             </p>
           </div>
         </div>
-        <div className="relative w-full order-1 sm:order-2 h-[60vh]">
+        <div className="relative w-full order-1 md:order-2 h-[60vh]">
           <Image
             src={"/certificate.jpg"}
             fill
@@ -148,7 +163,7 @@ const Body = () => {
           </h3>
           <div className="flex flex-col md:flex-row gap-5">
             <div className="w-full md:w-1/2 order-2 md:order-1 ">
-              <p className="text-justify px-4 text-lg">
+              <p className="text-justify px-4 text-base leading-9">
                 I&apos;m <strong>Ichani Gift Obas, </strong> a passionate real
                 estate agent who believes that property ownership should be
                 simple, transparent, and rewarding. I work closely with my

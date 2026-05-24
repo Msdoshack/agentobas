@@ -25,15 +25,12 @@ const page = () => {
           </div>
 
           {/* Search Box */}
-          <Suspense fallback={"loading..."}>
-            <SearchBox />
-          </Suspense>
+
+          <SearchBox />
         </div>
       </div>
 
-      <Suspense fallback={"loading..."}>
-        <Filter />
-      </Suspense>
+      <Filter />
 
       <Suspense fallback={"loading..."}>
         <PropertyList />
