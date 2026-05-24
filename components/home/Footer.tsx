@@ -107,9 +107,11 @@ const Footer = () => {
             ))}
           </div>
 
-          <div className="flex flex-col  sm:justify-center">
-            <p className="font-medium">Contact Us</p>
-            <div className="flex flex-col mt-5 gap-5">
+          <div className="flex flex-col ">
+            <p className="font-medium underline underline-offset-8">
+              Contact Us
+            </p>
+            <div className="flex flex-col mt-5  gap-5">
               {contact.map((item) => (
                 <a href={item.url} className="flex gap-2" key={item.id}>
                   <Image

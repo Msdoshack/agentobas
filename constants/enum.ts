@@ -5,14 +5,28 @@ export enum EXTERNAL_URLS {
 }
 
 export enum URLS {
-  homePage = "/",
+  loginPage = "/login",
+  signUp = "/signup",
 
+  // PUBLIC ROUTES
+  homePage = "/",
   propertiesPage = "/properties",
 
+  // ADMIN ROUTES
   adminPage = "/admin",
+  adminAllPropertyPage = "/admin/properties",
+  adminAddPropertyPage = "/admin/properties/add",
+
+  // Properties route
+  allPropertyPage = "/properties",
   propertyDetailsPage = "/admin/properties",
   addPropertyPage = "/admin/properties/add",
-  updatePropertyPage = "/admin/properties/update",
+  // updatePropertyPage = "/admin/properties/u
+
+  allusersPage = "/admin/users",
+  usersDetailsPage = "/admin/users",
+  addUserPage = "/admin/users/add",
+  updateUsersPage = "/admin/users/update",
 
   allCategoryPage = "/admin/categories",
   addCategoryPage = "/admin/categories/add",
@@ -21,6 +35,14 @@ export enum URLS {
   allTypePage = "/admin/types",
   addTypePage = "/admin/types/add",
   updateTypePage = "/admin/types/update",
+
+  allLocationPage = "/admin/locations",
+  addLocationPage = "/admin/locations/add",
+  updateLocationPage = "/admin/locations/update",
+
+  allPermissionPage = "/admin/permissions",
+  addPermissionPage = "/admin/permissions/add",
+  updatePermissionPage = "/admin/permissions/update",
 }
 
 export enum PROPERTY_TYPE_ENUM {

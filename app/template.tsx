@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+
 import DoorComponent from "@/components/DoorComponent";
 
 export default function Template({ children }: { children: React.ReactNode }) {

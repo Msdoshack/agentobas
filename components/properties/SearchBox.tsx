@@ -1,31 +1,42 @@
 "use client";
+import { Suspense, FormEvent, useState } from "react";
 import { PROPERTY_FILTER_ENUM } from "@/constants/enum";
 import { Search } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { FormEvent, useState } from "react";
 
-const SearchBox = () => {
+// 1. Core Logic Component
+const SearchBoxInner = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-  const currSearch = searchParams.get("search");
+  const currSearch = searchParams.get("search") || "";
   const [searchTerm, setSearchTerm] = useState(currSearch);
 
   const handleSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (searchTerm) {
-      router.push(`${pathname}?${PROPERTY_FILTER_ENUM.SEARCH}=${searchTerm}`);
+
+    // Convert current params to a mutable instance
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (searchTerm.trim()) {
+      params.set(PROPERTY_FILTER_ENUM.SEARCH, searchTerm.trim());
+    } else {
+      params.delete(PROPERTY_FILTER_ENUM.SEARCH); // Clears parameter if search is empty
     }
+
+    // Retain any existing filters (like page or category) while searching
+    router.push(`${pathname}?${params.toString()}`);
   };
+
   return (
     <form
-      className=" bg-white rounded-2xl p-1 flex items-center gap-2 shadow-2xl"
-      onSubmit={(e) => handleSearch(e)}
+      className="bg-white rounded-2xl p-1 flex items-center gap-2 shadow-2xl w-full"
+      onSubmit={handleSearch}
     >
       <Search className="text-slate-400 ml-4" size={24} />
 
       <input
-        defaultValue={currSearch as string}
+        value={searchTerm} // Controlled input component for better stability
         type="text"
         placeholder="Search by location, property type, or keywords..."
         className="flex-1 px-2 py-4 text-lg text-slate-900 outline-none border-none placeholder:text-sm sm:text-base"
@@ -33,12 +44,25 @@ const SearchBox = () => {
       />
 
       <button
-        className="bg-linear-to-r from-blue-600 to-blue-700 text-white px-4 sm:px-8 py-4 rounded-xl font-semibold hover:opacity-90 transition"
+        className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 sm:px-8 py-4 rounded-xl font-semibold hover:opacity-90 transition"
         type="submit"
       >
         Search
       </button>
     </form>
+  );
+};
+
+// 2. Safe Suspense Export Wrapper
+const SearchBox = () => {
+  return (
+    <Suspense
+      fallback={
+        <div className="bg-gray-100 rounded-2xl h-[72px] w-full animate-pulse shadow-2xl" />
+      }
+    >
+      <SearchBoxInner />
+    </Suspense>
   );
 };
 

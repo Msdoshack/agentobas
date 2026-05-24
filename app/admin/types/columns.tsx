@@ -1,17 +1,18 @@
 "use client";
 
-import DeleteTypeBtn from "@/components/admin/types/DeleteTypeBtn";
+import DeleteTypeBtn from "@/components/admin/listingtypes/DeleteTypeBtn";
 import { Checkbox } from "@/components/ui/checkbox";
 
 import { URLS } from "@/constants/enum";
 
-import { PropertyCategory } from "@/types/propertyCategory";
+import { Category } from "@/types/Category";
+import { ListingType } from "@/types/listingType";
 
 import { ColumnDef } from "@tanstack/react-table";
 
 import Link from "next/link";
 
-export const columns: ColumnDef<PropertyCategory>[] = [
+export const columns: ColumnDef<ListingType>[] = [
   {
     id: "select",
     header: ({ table }) => (

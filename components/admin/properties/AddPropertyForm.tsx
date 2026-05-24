@@ -1,7 +1,8 @@
 "use client";
-import { CldUploadButton } from "next-cloudinary";
+import { CldImage, CldUploadButton, CldVideoPlayer } from "next-cloudinary";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { NumericFormat } from "react-number-format";
 import {
   addPropertySchema,
   PropertyFormValues,
@@ -17,9 +18,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
-// import { useGetBrands } from "@/lib/tanstack/queries/brand/query";
-// import { useAddProductMutation } from "@/lib/tanstack/mutations/product/mutation";
-import { useEffect, useState } from "react";
+
+import { useCallback, useEffect, useState } from "react";
 import Spinner from "@/components/Spinner";
 import {
   Select,
@@ -31,55 +31,104 @@ import {
 
 import PropertyDescriptionEditor from "./PropertyDescEditor";
 import { Label } from "@/components/ui/label";
-import Image from "next/image";
-import { PROPERT_CATEGORIES, PROPERTY_TYPE } from "@/constants";
 
-export default function AddPropertyForm() {
-  // const {
-  //   data: brands,
-  //   isFetching: isBrandFetching,
-  //   isLoading: isBrandLoading,
-  // } = useGetBrands();
+import { ListingType } from "@/types/listingType";
+import { Category } from "@/types/Category";
+import { useCreateProperty } from "@/lib/hooks/tanstack/mutations/properties";
+import { Location } from "@/types/locations";
 
-  // const { mutate, isPending, isSuccess, isError } = useAddProductMutation();
-  const [longDesc, setLongDesc] = useState("");
+type PropsType = {
+  locations: Location[];
+  listingTypes: ListingType[];
+  categories: Category[];
+};
 
-  const isPending = false;
-  const isSuccess = false;
-  const isError = false;
+export default function AddPropertyForm({
+  listingTypes,
+  locations,
+  categories,
+}: PropsType) {
+  const { mutate, isPending, isSuccess, error } = useCreateProperty();
+  const [Description, setDescription] = useState("");
 
-  const [categoryId, setCategoryId] = useState<string | null>(null);
   const form = useForm<PropertyFormValues>({
     resolver: zodResolver(addPropertySchema),
     defaultValues: {
-      name: "",
-      // description: "",
-      categoryId: "",
-      typeId: "",
-      baths: 0,
-      beds: 0,
+      title: "",
       price: "",
-      sqft: 0,
-      imgs: [],
+      categoryId: "",
+      listingTypeId: "",
+      locationId: "",
+      baths: "",
+      beds: "",
+      plots: "",
+      images: [],
+      videos: [],
     },
   });
 
+  const handleImageUpload = useCallback(
+    (result: any) => {
+      console.log(result);
+      if (result.event === "success") {
+        const info = result.info;
+
+        const image = {
+          url: info.secure_url,
+          publicId: info.public_id,
+          thumbnail: info.thumnail_url || info.secure_url,
+        };
+
+        const current = form.getValues("images") || [];
+
+        form.setValue("images", [...current, image]);
+      }
+    },
+    [form],
+  );
+
+  const handleVideoUpload = useCallback(
+    (result: any) => {
+      console.log(result);
+      if (result.event === "success") {
+        const info = result.info;
+
+        const video = {
+          url: info.secure_url,
+          publicId: info.public_id,
+          thumbnail: info.thumnail_url || info.secure_url,
+        };
+
+        const current = form.getValues("videos") || [];
+
+        form.setValue("videos", [...current!, video]);
+      }
+    },
+    [form],
+  );
+
   const onSubmit = (values: PropertyFormValues) => {
-    // mutate({ ...values, description: longDesc });
+    console.log(values);
+    mutate({
+      ...values,
+      categoryId: values.categoryId,
+      listingTypeId: values.listingTypeId,
+      locationId: values.locationId,
+      price: parseInt(values.price),
+      baths: parseInt(values.baths!),
+      beds: parseInt(values.beds!),
+      description: Description,
+    });
   };
 
   useEffect(() => {
-    if (categoryId) {
-      form.setValue("categoryId", categoryId);
-    }
-  }, [categoryId]);
-
-  useEffect(() => {
-    if (isSuccess && !isError) {
+    if (isSuccess) {
       toast.success("product Added");
-      setCategoryId(null);
-      setLongDesc("");
+
+      setDescription("");
       form.reset();
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }, [isSuccess]);
   return (
@@ -88,58 +137,17 @@ export default function AddPropertyForm() {
         onSubmit={form.handleSubmit(onSubmit, (errors) => {
           console.error("Validation errors:", errors);
         })}
-        className="space-y-6 p-4 border rounded-lg mt-16"
+        className="space-y-6 p-4 border rounded-lg mt-16 text-black"
       >
-        {/* Product Images */}
-        <FormField
-          control={form.control}
-          name="imgs"
-          render={() => (
-            <FormItem>
-              <FormLabel>Property Images</FormLabel>
-
-              <CldUploadButton
-                className="px-4 py-2  rounded-md mt-4 bg-gray-900 text-white font-medium"
-                uploadPreset="digo_app"
-                options={{ multiple: true }}
-                onSuccess={(result) => {
-                  if (result.event === "success") {
-                    const uploadedUrl = (result.info as { secure_url: string })
-                      .secure_url;
-                    // const uploadedUrl = result.info.secure_url;
-                    form.setValue("imgs", [
-                      ...form.getValues("imgs"),
-                      uploadedUrl,
-                    ]);
-                  }
-                }}
-              >
-                Upload Images
-              </CldUploadButton>
-
-              <div className="flex gap-4 flex-wrap mt-8">
-                {form.watch("imgs")?.map((url, i) => (
-                  <div
-                    className="w-36 h-auto object-cover rounded border relative"
-                    key={i}
-                  >
-                    <Image src={url} alt={`preview-${i}`} fill />
-                  </div>
-                ))}
-              </div>
-
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
         {/* Product basic info */}
+
+        {/* Property title */}
         <FormField
           control={form.control}
-          name="name"
+          name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Property Name</FormLabel>
+              <FormLabel>Property Title</FormLabel>
               <FormControl>
                 <Input placeholder="Nike Air Force 1" {...field} />
               </FormControl>
@@ -148,6 +156,7 @@ export default function AddPropertyForm() {
           )}
         />
 
+        {/*Property Category */}
         <FormField
           control={form.control}
           name="categoryId"
@@ -161,11 +170,17 @@ export default function AddPropertyForm() {
                   value={field.value}
                 >
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select category" />
+                    <SelectValue
+                      placeholder="Select category"
+                      className="text-red-500"
+                    />
                   </SelectTrigger>
                   <SelectContent>
-                    {PROPERT_CATEGORIES?.map((category) => (
-                      <SelectItem key={category.id} value={category.id}>
+                    {categories?.map((category) => (
+                      <SelectItem
+                        key={category.id}
+                        value={category.id.toString()}
+                      >
                         {category.name}
                       </SelectItem>
                     ))}
@@ -177,13 +192,13 @@ export default function AddPropertyForm() {
           )}
         />
 
-        {/* Brand select */}
+        {/* Listing-Type Select */}
         <FormField
           control={form.control}
-          name="typeId"
+          name="listingTypeId"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Type</FormLabel>
+              <FormLabel>Listing-Type</FormLabel>
               <FormControl>
                 <Select
                   onValueChange={field.onChange}
@@ -191,11 +206,11 @@ export default function AddPropertyForm() {
                   value={field.value}
                 >
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select a brand" />
+                    <SelectValue placeholder="Select listing-type" />
                   </SelectTrigger>
                   <SelectContent>
-                    {PROPERTY_TYPE?.map((type) => (
-                      <SelectItem key={type.id} value={type.id}>
+                    {listingTypes?.map((type) => (
+                      <SelectItem key={type.id} value={type.id.toString()}>
                         {type.name}
                       </SelectItem>
                     ))}
@@ -207,6 +222,40 @@ export default function AddPropertyForm() {
           )}
         />
 
+        {/* Locations Select */}
+        <FormField
+          control={form.control}
+          name="locationId"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Location</FormLabel>
+              <FormControl>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  value={field.value}
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Select location" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {locations?.map((location) => (
+                      <SelectItem
+                        key={location.id}
+                        value={location.id.toString()}
+                      >
+                        {location.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Property Price */}
         <FormField
           control={form.control}
           name="price"
@@ -214,7 +263,33 @@ export default function AddPropertyForm() {
             <FormItem>
               <FormLabel>Price</FormLabel>
               <FormControl>
-                <Input placeholder="price" {...field} />
+                <NumericFormat
+                  customInput={Input}
+                  thousandSeparator=","
+                  allowNegative={false}
+                  prefix="₦ "
+                  placeholder="Property price"
+                  value={field.value}
+                  onValueChange={(values) => {
+                    field.onChange(values.value);
+                  }}
+                />
+                {/* <Input placeholder="price" {...field} /> */}
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/*  Property Plots*/}
+        <FormField
+          control={form.control}
+          name="plots"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Plots</FormLabel>
+              <FormControl>
+                <Input placeholder="Plots" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -251,10 +326,166 @@ export default function AddPropertyForm() {
         <div className="space-y-3">
           <Label>Description</Label>
           <PropertyDescriptionEditor
-            value={longDesc}
-            onChange={(e) => setLongDesc(e)}
+            value={Description}
+            onChange={(e) => setDescription(e)}
           />
         </div>
+
+        {error && <span className="error">{error.message}</span>}
+
+        {/* Product Images */}
+        <FormField
+          control={form.control}
+          name="images"
+          render={() => (
+            <FormItem>
+              <FormLabel>Property Images</FormLabel>
+
+              <CldUploadButton
+                className="px-4 py-2  rounded-md mt-4 bg-gray-900 text-white font-medium w-60"
+                uploadPreset="igobas"
+                options={{
+                  multiple: true,
+                  resourceType: "image",
+                  clientAllowedFormats: ["jpg", "jpeg", "png", "webp"],
+                }}
+                onSuccess={handleImageUpload}
+              >
+                Upload Images
+              </CldUploadButton>
+
+              <div className="flex gap-4 flex-wrap my-8">
+                {form.watch("images")?.map((url, i) => (
+                  <div
+                    className="w-36 h-36 object-cover rounded border relative"
+                    key={i}
+                  >
+                    <CldImage
+                      src={url.publicId}
+                      alt="img"
+                      width={144}
+                      height={144}
+                    />
+                    {/* <img src={url} alt={`preview-${i}`} /> */}
+                  </div>
+                ))}
+              </div>
+
+              {/* <div className="space-y-3">
+                {imageFields.map((field, index) => (
+                  <div key={field.id} className="flex gap-2">
+                    <Input
+                      placeholder="https://example.com/image.jpg"
+                      {...form.register(`images.${index}`)}
+                    />
+
+                    {imageFields.length > 1 && (
+                      <Button
+                        type="button"
+                        variant="destructive"
+                        onClick={() => remove(index)}
+                      >
+                        ✕
+                      </Button>
+                    )}
+                  </div>
+                ))}
+              </div> */}
+
+              {/* <Button
+                type="button"
+                variant="secondary"
+                className="mt-3"
+                onClick={() => append("")}
+              >
+                + Add by image URL
+              </Button> */}
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Product Videos */}
+        <FormField
+          control={form.control}
+          name="videos"
+          render={() => (
+            <FormItem>
+              <FormLabel>Property Video</FormLabel>
+
+              <CldUploadButton
+                className="px-4 py-2  rounded-md mt-4 bg-gray-900 text-white font-medium w-60"
+                uploadPreset="igobas"
+                options={{
+                  multiple: true,
+                  resourceType: "video",
+                  clientAllowedFormats: ["mp4", "mov", "avi", "webm"],
+                }}
+                onSuccess={handleVideoUpload}
+                // onSuccess={(result) => {
+                //   if (result.event === "success") {
+                //     const uploadedUrl = (result.info as { secure_url: string })
+                //       .secure_url;
+                //     // const uploadedUrl = result.info.secure_url;
+                //     form.setValue("videos", [
+                //       ...form.getValues("videos"),
+                //       uploadedUrl,
+                //     ]);
+                //   }
+                // }}
+              >
+                Upload Videos
+              </CldUploadButton>
+
+              <div className="my-8">
+                {form.watch("videos")?.map((url, i) => (
+                  <div key={i} className="rounded border relative">
+                    <CldVideoPlayer
+                      src={url?.publicId}
+                      width="500"
+                      height="500"
+                      controls
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              {/* <div className="space-y-3">
+                {videoFields.map((field, index) => (
+                  <div key={field.id} className="flex gap-2">
+                    <Input
+                      placeholder="https://example.com/video.mp4"
+                      {...form.register(`videos.${index}`)}
+                    />
+
+                    {videoFields.length > 1 && (
+                      <Button
+                        type="button"
+                        variant="destructive"
+                        onClick={() => removeVid(index)}
+                      >
+                        ✕
+                      </Button>
+                    )}
+                  </div>
+                ))}
+              </div> */}
+
+              {/* <Button
+                type="button"
+                variant="secondary"
+                className="mt-3"
+                onClick={() => appendVid("")}
+              >
+                + Add by video URL
+              </Button> */}
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <Button
           size={"lg"}

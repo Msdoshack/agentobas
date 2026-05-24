@@ -16,28 +16,43 @@ import {
   addCategorySchema,
   CategoryFormValues,
 } from "@/lib/validators/categoryValidator";
+import { Category } from "@/types/Category";
+import { useUpdateCategory } from "@/lib/hooks/tanstack/mutations/categories";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { URLS } from "@/constants/enum";
+import Spinner from "@/components/Spinner";
 
-const UpdateCategoryForm = () => {
-  // const { mutate, isPending, isSuccess, error } = useAddCategoryMutation();
+type PropsType = {
+  category: Category;
+};
+
+const UpdateCategoryForm = ({ category }: PropsType) => {
+  const { mutate, isPending, isSuccess, error } = useUpdateCategory();
   const form = useForm<CategoryFormValues>({
     resolver: zodResolver(addCategorySchema),
     defaultValues: {
-      name: "",
+      name: category.name,
     },
   });
 
+  const router = useRouter();
+
   const onSubmit = async (values: CategoryFormValues) => {
-    // mutate({ values, parentId: parentCategoryId });
+    mutate({ id: category.id, name: values.name });
   };
 
-  // useEffect(() => {
-  //   if (isSuccess && !error) {
-  //     toast.success("Added new category");
-  //     form.reset();
-  //     setParentCategoryId(null);
-  //     return;
-  //   }
-  // }, [isSuccess, error]);
+  useEffect(() => {
+    if (isSuccess && !error) {
+      toast.success("Added new category");
+      form.reset();
+
+      router.push(URLS.allCategoryPage);
+
+      return;
+    }
+  }, [isSuccess, error]);
 
   return (
     <div className="px-5 my-32">
@@ -54,6 +69,7 @@ const UpdateCategoryForm = () => {
                 <FormLabel className="text-base">Category</FormLabel>
                 <FormControl>
                   <Input
+                    autoFocus
                     className="text-base"
                     placeholder="E.g. land, house, shop e.t.c"
                     {...field}
@@ -64,13 +80,17 @@ const UpdateCategoryForm = () => {
             )}
           />
 
+          {error && (
+            <span className="text-sm text-red-600">{error.message}</span>
+          )}
+
           <Button
             type="submit"
             size={"lg"}
-            // disabled={isPending}
+            disabled={isPending}
             className="bg-gray-900 text-white w-full mt-8 text-base font-medium"
           >
-            Update Category
+            {isPending ? <Spinner /> : "Update Category"}
           </Button>
         </form>
       </Form>

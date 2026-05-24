@@ -3,11 +3,16 @@ import { Menu } from "lucide-react";
 import MobileNavModal from "./modals/MobileNavModal";
 import { AnimatePresence } from "motion/react";
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import MobileAdminNav from "./modals/MobileAdminNav";
 
-const MobileNavIcon = () => {
+const MobileNavIcon = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
   const [showNav, setShowNav] = useState(false);
 
   const modalRef = useRef<HTMLDivElement | null>(null);
+
+  const pathname = usePathname();
+  const isAdminRoute = pathname.includes("/admin");
 
   const onClose = () => {
     setShowNav(false);
@@ -28,11 +33,20 @@ const MobileNavIcon = () => {
   }, [showNav]);
   return (
     <>
-      <div className="sm:hidden">
+      <div className="md:hidden">
         <Menu onClick={() => setShowNav(true)} />
       </div>
       <AnimatePresence>
-        {showNav && <MobileNavModal ref={modalRef} onClose={onClose} />}
+        {showNav &&
+          (isAdminRoute ? (
+            <MobileAdminNav ref={modalRef} onClose={onClose} />
+          ) : (
+            <MobileNavModal
+              ref={modalRef}
+              onClose={onClose}
+              isAuthenticated={isAuthenticated}
+            />
+          ))}
       </AnimatePresence>
     </>
   );

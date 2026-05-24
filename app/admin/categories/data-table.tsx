@@ -1,5 +1,6 @@
 "use client";
 import {
+  RowData,
   ColumnDef,
   flexRender,
   getCoreRowModel,
@@ -16,29 +17,25 @@ import {
 import { useState } from "react";
 import { DataTablePagination } from "@/components/admin/DataTablePagination";
 
-import { PROPERT_CATEGORIES } from "@/constants";
-import { PropertyCategory } from "@/types/propertyCategory";
+import { Category } from "@/types/Category";
 
-interface DataTableProps<TValue> {
-  columns: ColumnDef<PropertyCategory, TValue>[];
+interface DataTableProps<TData, TValue> {
+  columns: ColumnDef<Category, TValue>[];
+  data: Category[];
 }
 
-export function DataTable<TValue>({ columns }: DataTableProps<TValue>) {
+export function DataTable<TData, TValue>({
+  columns,
+  data,
+}: DataTableProps<TData, TValue>) {
   const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 20 });
   const [rowSelection, setRowSelection] = useState({});
-  // const { data, isLoading } = useGetAllProductAdmin({
-  //   page: String(pagination.pageIndex + 1),
-  //   limit: String(pagination.pageSize),
-  // });
 
-  // const totalCount = data?.totalCount ?? 0;
-
-  // const pageCount = data?.totalPages;
   const isLoading = false;
   const pageCount = 1;
 
   const table = useReactTable({
-    data: PROPERT_CATEGORIES,
+    data,
     columns,
     pageCount,
     manualPagination: true,
@@ -74,7 +71,7 @@ export function DataTable<TValue>({ columns }: DataTableProps<TValue>) {
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
-                          header.getContext()
+                          header.getContext(),
                         )}
                   </TableHead>
                 );

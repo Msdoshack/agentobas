@@ -1,12 +1,13 @@
 import Filter from "@/components/properties/Filter";
 import PropertyList from "@/components/properties/PropertyList";
 import SearchBox from "@/components/properties/SearchBox";
+
 import Image from "next/image";
 import { Suspense } from "react";
 
 const page = () => {
   return (
-    <div className="min-h-screen">
+    <div className=" bg-slate-50">
       <div className="relative w-full h-full  backdrop-blur-xs bg-linear-to-r from-blue-600 via-blue-700 to-indigo-700 text-white">
         <Image
           fill

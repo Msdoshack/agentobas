@@ -122,6 +122,18 @@
   }
 }
 
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+
+.error {
+  @apply text-sm text-red-600;
+}
+
 .gradient-bg {
   @apply bg-linear-to-r from-[#2563eb] to-[#1d4ed8];
 }

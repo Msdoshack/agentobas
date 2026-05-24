@@ -34,7 +34,7 @@ const Card = ({
 
 const Body = () => {
   return (
-    <div className=" max-w-6xl mx-auto mt-24">
+    <div className=" max-w-6xl mx-auto mt-24 lg:mt-32">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-2 xl:px-0">
         <div className="order-2 sm:order-1 flex flex-col justify-between gap-4 ">
           <h4 className="font-semibold text-2xl sm:3xl lg:text-4xl">
@@ -64,7 +64,7 @@ const Body = () => {
 
       <LandDeals />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 gap-y-16 mt-24">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 gap-y-16 mt-24 lg:mt-32">
         <Card
           body="Nothing beats working with a buyer's agent who can help you navigate the nuances of buying a home in your local market. From the first look to the final step, let a CENTURY 21® independent agent be there for you through every moment of the homebuying process."
           img="/buy.webp"
@@ -95,7 +95,7 @@ const Body = () => {
         />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-2 xl:px-0 mt-25">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-2 xl:px-0 mt-24 lg:mt-32">
         <div className="order-2 sm:order-1 flex flex-col gap-5 ">
           <h4 className="font-semibold text-2xl sm:3xl lg:text-4xl">
             Registered and Compliant
@@ -125,17 +125,17 @@ const Body = () => {
             </p>
           </div>
         </div>
-        <div className="relative w-full aspect-5/6 order-1 sm:order-2">
+        <div className="relative w-full order-1 sm:order-2 h-[60vh]">
           <Image
             src={"/certificate.jpg"}
             fill
             alt="agent picture "
-            className="object-fit"
+            className="object-contain"
           />
         </div>
       </div>
 
-      <div className="bg-linear-to-r from-gray-900 to-gray-950 text-white my-16 px-6 py-12 mx-2 relative">
+      <div className="bg-linear-to-r from-gray-900 to-gray-950 text-white my-24 lg:my-32 px-6 py-12 mx-2 relative">
         <Image
           src={"/home-image-800.webp"}
           className="opacity-10 object-cover"

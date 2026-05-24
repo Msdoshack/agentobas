@@ -1,5 +1,4 @@
 "use client";
-import { CldUploadButton } from "next-cloudinary";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -17,8 +16,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
-// import { useGetBrands } from "@/lib/tanstack/queries/brand/query";
-// import { useAddProductMutation } from "@/lib/tanstack/mutations/product/mutation";
 import { useEffect, useState } from "react";
 import Spinner from "@/components/Spinner";
 import {
@@ -31,55 +28,77 @@ import {
 
 import PropertyDescriptionEditor from "./PropertyDescEditor";
 import { Label } from "@/components/ui/label";
-import Image from "next/image";
-import { PROPERT_CATEGORIES, PROPERTY_TYPE } from "@/constants";
 
-export default function UpdatePropertyForm() {
-  // const {
-  //   data: brands,
-  //   isFetching: isBrandFetching,
-  //   isLoading: isBrandLoading,
-  // } = useGetBrands();
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Property } from "@/types/property";
+import { Location } from "@/types/locations";
+import { Category } from "@/types/Category";
+import { ListingType } from "@/types/listingType";
+import { propertiesApi } from "@/lib/api/properties";
+import { useUpdateProperty } from "@/lib/hooks/tanstack/mutations/properties";
+import { error } from "console";
+import { useRouter } from "next/navigation";
+import { URLS } from "@/constants/enum";
+import { NumericFormat } from "react-number-format";
 
-  // const { mutate, isPending, isSuccess, isError } = useAddProductMutation();
-  const [longDesc, setLongDesc] = useState("");
+type PropsType = {
+  property: Property;
+  locations: Location[];
+  categories: Category[];
+  listingTypes: ListingType[];
+};
 
-  const isPending = false;
-  const isSuccess = false;
-  const isError = false;
+export default function UpdatePropertyForm({
+  property,
+  listingTypes,
+  locations,
+  categories,
+}: PropsType) {
+  const { mutate, isPending, isSuccess, error } = useUpdateProperty();
+  const router = useRouter();
 
-  const [categoryId, setCategoryId] = useState<string | null>(null);
+  const [description, setDescription] = useState(property.description);
+
   const form = useForm<UpdatePropertyFormValues>({
     resolver: zodResolver(updatePropertySchema),
     defaultValues: {
-      name: "",
-      isAvailable: true,
-      description: "",
-      categoryId: "",
-      typeId: "",
-      baths: 0,
-      beds: 0,
-      price: "",
-      sqft: 0,
-      imgs: [],
+      title: property.title,
+      price: property.price.toString(),
+      categoryId: property.category.id.toString(),
+      listingTypeId: property.listingType.id.toString(),
+      locationId: property.location.id.toString(),
+      baths: property.baths?.toString(),
+      beds: property.beds?.toString(),
+      plots: property.plots,
+      isAvailable: String(property.isAvailable),
     },
   });
 
   const onSubmit = (values: UpdatePropertyFormValues) => {
-    // mutate({ ...values, description: longDesc });
+    mutate({
+      data: {
+        ...values,
+        description,
+        price: parseInt(values.price),
+        beds: parseInt(values.beds!),
+        baths: parseInt(values.baths!),
+        plots: values.plots,
+        listingTypeId: values.listingTypeId,
+        categoryId: values.categoryId,
+        locationId: values.locationId,
+        isAvailable: Boolean(values.isAvailable === "true"),
+      },
+      id: property.id.toString(),
+    });
   };
 
   useEffect(() => {
-    if (categoryId) {
-      form.setValue("categoryId", categoryId);
-    }
-  }, [categoryId]);
-
-  useEffect(() => {
-    if (isSuccess && !isError) {
+    if (isSuccess) {
       toast.success("product Added");
-      setCategoryId(null);
-      setLongDesc("");
+      router.push(URLS.adminAllPropertyPage);
+
+      setDescription("");
+
       form.reset();
     }
   }, [isSuccess]);
@@ -91,64 +110,25 @@ export default function UpdatePropertyForm() {
         })}
         className="space-y-6 p-4 border rounded-lg mt-16"
       >
-        {/* Product Images */}
+        {/* Title */}
         <FormField
           control={form.control}
-          name="imgs"
-          render={() => (
-            <FormItem>
-              <FormLabel>Property Images</FormLabel>
-
-              <CldUploadButton
-                className="px-4 py-2  rounded-md mt-4 bg-gray-900 text-white font-medium"
-                uploadPreset="digo_app"
-                options={{ multiple: true }}
-                onSuccess={(result) => {
-                  if (result.event === "success") {
-                    const uploadedUrl = (result.info as { secure_url: string })
-                      .secure_url;
-                    // const uploadedUrl = result.info.secure_url;
-                    form.setValue("imgs", [
-                      ...form.getValues("imgs"),
-                      uploadedUrl,
-                    ]);
-                  }
-                }}
-              >
-                Upload Images
-              </CldUploadButton>
-
-              <div className="flex gap-4 flex-wrap mt-8">
-                {form.watch("imgs")?.map((url, i) => (
-                  <div
-                    className="w-36 h-auto object-cover rounded border relative"
-                    key={i}
-                  >
-                    <Image src={url} alt={`preview-${i}`} fill />
-                  </div>
-                ))}
-              </div>
-
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        {/* Product basic info */}
-        <FormField
-          control={form.control}
-          name="name"
+          name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Property Name</FormLabel>
+              <FormLabel>Property Title</FormLabel>
               <FormControl>
-                <Input placeholder="Nike Air Force 1" {...field} />
+                <Input
+                  placeholder="E.g a bedsitter available at ..."
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
 
+        {/* Category */}
         <FormField
           control={form.control}
           name="categoryId"
@@ -162,11 +142,14 @@ export default function UpdatePropertyForm() {
                   value={field.value}
                 >
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select category" />
+                    <SelectValue placeholder="Update category" />
                   </SelectTrigger>
                   <SelectContent>
-                    {PROPERT_CATEGORIES?.map((category) => (
-                      <SelectItem key={category.id} value={category.id}>
+                    {categories?.map((category) => (
+                      <SelectItem
+                        key={category.id}
+                        value={category.id.toString()}
+                      >
                         {category.name}
                       </SelectItem>
                     ))}
@@ -178,13 +161,13 @@ export default function UpdatePropertyForm() {
           )}
         />
 
-        {/* Brand select */}
+        {/*  Listing Type */}
         <FormField
           control={form.control}
-          name="typeId"
+          name="listingTypeId"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Type</FormLabel>
+              <FormLabel>Listing-Type</FormLabel>
               <FormControl>
                 <Select
                   onValueChange={field.onChange}
@@ -192,14 +175,72 @@ export default function UpdatePropertyForm() {
                   value={field.value}
                 >
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select a brand" />
+                    <SelectValue placeholder="Update listing-type" />
                   </SelectTrigger>
                   <SelectContent>
-                    {PROPERTY_TYPE?.map((type) => (
-                      <SelectItem key={type.id} value={type.id}>
+                    {listingTypes?.map((type) => (
+                      <SelectItem key={type.id} value={type.id.toString()}>
                         {type.name}
                       </SelectItem>
                     ))}
+                  </SelectContent>
+                </Select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="locationId"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Location</FormLabel>
+              <FormControl>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  value={field.value}
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Update Location" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {locations?.map((location) => (
+                      <SelectItem
+                        key={location.id}
+                        value={location.id.toString()}
+                      >
+                        {location.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="isAvailable"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>is Available?</FormLabel>
+              <FormControl>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  value={field.value}
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Update Locations" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="true">Yes</SelectItem>
+                    <SelectItem value="false">No</SelectItem>
                   </SelectContent>
                 </Select>
               </FormControl>
@@ -215,7 +256,32 @@ export default function UpdatePropertyForm() {
             <FormItem>
               <FormLabel>Price</FormLabel>
               <FormControl>
-                <Input placeholder="price" {...field} />
+                <NumericFormat
+                  customInput={Input}
+                  thousandSeparator=","
+                  allowNegative={false}
+                  prefix="₦ "
+                  placeholder="Property price"
+                  value={field.value}
+                  onValueChange={(values) => {
+                    field.onChange(values.value);
+                  }}
+                />
+                {/* <Input placeholder="price" {...field} /> */}
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="plots"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Plots</FormLabel>
+              <FormControl>
+                <Input placeholder="Plots" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -235,6 +301,7 @@ export default function UpdatePropertyForm() {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="baths"
@@ -252,10 +319,12 @@ export default function UpdatePropertyForm() {
         <div className="space-y-3">
           <Label>Description</Label>
           <PropertyDescriptionEditor
-            value={longDesc}
-            onChange={(e) => setLongDesc(e)}
+            value={description}
+            onChange={(e) => setDescription(e)}
           />
         </div>
+
+        {error && <span className="error">{error.message}</span>}
 
         <Button
           size={"lg"}
@@ -263,7 +332,7 @@ export default function UpdatePropertyForm() {
           disabled={isPending}
           type="submit"
         >
-          {isPending ? <Spinner /> : "Add Property"}
+          {isPending ? <Spinner /> : "Update Property"}
         </Button>
       </form>
     </Form>

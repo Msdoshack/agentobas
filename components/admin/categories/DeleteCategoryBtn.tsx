@@ -1,14 +1,18 @@
 "use client";
 
 import DeleteModal from "@/components/modals/DeleteModal";
+import { useDeleteCategory } from "@/lib/hooks/tanstack/mutations/categories";
 import { useState } from "react";
 
 type PropsType = {
   categoryId: string;
 };
 const DeleteCategoryBtn = ({ categoryId }: PropsType) => {
+  const { mutate, isPending, isSuccess, error } = useDeleteCategory();
   const [showModal, setShowModal] = useState(false);
-  const delFn = () => {};
+  const delFn = () => {
+    mutate(categoryId);
+  };
   return (
     <>
       <button
@@ -19,7 +23,13 @@ const DeleteCategoryBtn = ({ categoryId }: PropsType) => {
       </button>
 
       {showModal && (
-        <DeleteModal onClose={() => setShowModal(false)} delFn={delFn} />
+        <DeleteModal
+          onClose={() => setShowModal(false)}
+          delFn={delFn}
+          isPending={isPending}
+          error={error}
+          isSuccess={isSuccess}
+        />
       )}
     </>
   );

@@ -1,14 +1,18 @@
-import { properties } from "@/constants";
+import PropertyImage from "@/components/properties/imageSection";
+import PropertyDescription from "@/components/properties/PropertyDescription";
+import VideoSection from "@/components/properties/VideoSection";
 import { EXTERNAL_URLS, URLS } from "@/constants/enum";
+import { propertiesApi } from "@/lib/api/properties";
 import {
   ArrowLeft,
   Bath,
   Bed,
+  LandPlot,
   LucideProps,
   MapPin,
   Phone,
-  Square,
 } from "lucide-react";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
@@ -17,7 +21,7 @@ const InfoCard = ({
   property,
 }: {
   property: {
-    value: number;
+    value: number | string;
     title: string;
     Icon: ForwardRefExoticComponent<
       Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
@@ -44,7 +48,8 @@ const page = async ({
 }) => {
   const { propertyId } = await params;
 
-  const property = properties.find((property) => property.id === propertyId);
+  // const property = properties.find((property) => property.id === propertyId);
+  const property = (await propertiesApi.get(propertyId)).data;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -57,51 +62,60 @@ const page = async ({
             >
               <ArrowLeft size={18} /> Go back
             </Link>
+
             <div className="flex flex-col md:flex-row gap-8 ">
-              {/* IMAGE */}
-              <div className="relative w-full  md:w-1/2 h-96">
-                <Image src={property.images[0]} fill alt="Property image" />
-              </div>
+              <PropertyImage
+                images={property.images}
+                videos={property.videos!}
+              />
 
               {/* DETAILS && CONTACT AGENT  */}
               <div className="w-full md:w-1/2">
                 <div className="flex items-start justify-between mb-6 flex-wrap gap-4">
                   <div>
-                    <h1 className="text-2xl sm:text-4xl font-bold text-gray-800 mb-2">
+                    <h1 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-2">
                       {property.title}
                     </h1>
                     <p className="flex items-center gap-2 text-gray-600">
                       <MapPin size={18} />
-                      {property.address}
+                      {property.location.name}
                     </p>
                   </div>
                   <span className="bg-linear-to-r from-[#2563eb] to-[#1d4ed8] text-white px-5 py-2 rounded-full text-sm font-semibold uppercase">
-                    For {property.type}
+                    For {property.listingType.name}
                   </span>
                 </div>
 
                 <div className="flex gap-8 mb-8 pb-8 border-b border-gray-300 flex-wrap">
-                  <InfoCard
-                    property={{
-                      value: property.beds,
-                      title: "Bedrooms",
-                      Icon: Bed,
-                    }}
-                  />
-                  <InfoCard
-                    property={{
-                      value: property.baths,
-                      title: "Bathrooms",
-                      Icon: Bath,
-                    }}
-                  />
-                  <InfoCard
-                    property={{
-                      value: property.sqft,
-                      title: "Square Feet",
-                      Icon: Square,
-                    }}
-                  />
+                  {property.beds && (
+                    <InfoCard
+                      property={{
+                        value: property.beds!,
+                        title: "Bedrooms",
+                        Icon: Bed,
+                      }}
+                    />
+                  )}
+
+                  {property.baths && (
+                    <InfoCard
+                      property={{
+                        value: property.baths!,
+                        title: "Bathrooms",
+                        Icon: Bath,
+                      }}
+                    />
+                  )}
+
+                  {property.plots && (
+                    <InfoCard
+                      property={{
+                        value: property.plots!,
+                        title: "Plots",
+                        Icon: LandPlot,
+                      }}
+                    />
+                  )}
                 </div>
 
                 {/* CONTACT AGENT */}
@@ -137,11 +151,21 @@ const page = async ({
             </div>
 
             {/* PROPERTY DESCRIPTION */}
-            <div className="my-16">
+
+            <div className="my-16 max-w-6xl mx-auto">
               <h2 className="text-lg font-bold text-gray-700 mb-4">
                 About This Property
               </h2>
-              <p className="text-gray-700">{property.description}</p>
+
+              <div className="flex flex-col md:flex-row gap-y-8 rounded-md">
+                <div className="w-full md:w-1/2 order-1 md:order-2">
+                  <VideoSection videos={property.videos!} />
+                </div>
+
+                <div className="w-full md:w-1/2 order-2 md:order-1 p-3 py-4  bg-gray-50 ">
+                  <PropertyDescription description={property.description} />
+                </div>
+              </div>
             </div>
           </div>
         ) : (

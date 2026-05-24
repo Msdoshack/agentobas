@@ -1,10 +1,12 @@
 import AddCategoryForm from "@/components/admin/categories/AddCategoryForm";
 import Heading from "@/components/admin/Heading";
+import GoBackBtn from "@/components/GoBackBtn";
 
 const page = () => {
   return (
     <div className="py-8 w-full">
-      <div className="max-w-4xl mx-auto">
+      <GoBackBtn />
+      <div className="max-w-2xl mx-auto">
         <Heading name="Add Category" />
 
         <AddCategoryForm />

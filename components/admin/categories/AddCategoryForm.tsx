@@ -17,9 +17,13 @@ import {
   addCategorySchema,
   CategoryFormValues,
 } from "@/lib/validators/categoryValidator";
+import { useCreateCategory } from "@/lib/hooks/tanstack/mutations/categories";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
+import Spinner from "@/components/Spinner";
 
 const AddCategoryForm = () => {
-  // const { mutate, isPending, isSuccess, error } = useAddCategoryMutation();
+  const { mutate, isPending, isSuccess, error } = useCreateCategory();
   const form = useForm<CategoryFormValues>({
     resolver: zodResolver(addCategorySchema),
     defaultValues: {
@@ -28,17 +32,18 @@ const AddCategoryForm = () => {
   });
 
   const onSubmit = async (values: CategoryFormValues) => {
-    // mutate({ values, parentId: parentCategoryId });
+    mutate(values);
   };
 
-  // useEffect(() => {
-  //   if (isSuccess && !error) {
-  //     toast.success("Added new category");
-  //     form.reset();
-  //     setParentCategoryId(null);
-  //     return;
-  //   }
-  // }, [isSuccess, error]);
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Added new category");
+
+      form.reset();
+
+      return;
+    }
+  }, [isSuccess]);
 
   return (
     <div className="px-5 my-32">
@@ -64,14 +69,17 @@ const AddCategoryForm = () => {
               </FormItem>
             )}
           />
+          {error && (
+            <span className="text-sm text-red-600">{error.message}</span>
+          )}
 
           <Button
             type="submit"
             size={"lg"}
-            // disabled={isPending}
+            disabled={isPending}
             className="bg-gray-900 text-white w-full mt-8 text-base font-medium"
           >
-            Add Category
+            {isPending ? <Spinner /> : "Add Category"}
           </Button>
         </form>
       </Form>

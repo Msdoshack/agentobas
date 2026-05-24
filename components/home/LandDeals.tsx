@@ -6,8 +6,10 @@ import {
   URLS,
 } from "@/constants/enum";
 import { properties } from "@/constants";
+import { propertiesApi } from "@/lib/api/properties";
 
-const LandDeals = () => {
+const LandDeals = async () => {
+  const properties = await propertiesApi.getAll();
   return (
     <div className="mt-16 max-w-6xl mx-auto px-1">
       <div className="flex items-center justify-between mb-4 px-1">
@@ -23,7 +25,7 @@ const LandDeals = () => {
       </div>
 
       <div className="flex overflow-x-scroll gap-4 sm:gap-6">
-        {properties.map((item) => (
+        {properties.data.map((item) => (
           <PropertyCard isGrid={false} property={item} key={item.id} />
         ))}
       </div>

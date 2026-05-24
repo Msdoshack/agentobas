@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const formatPrice = (price: number, type: string) => {
-  if (type === "sale") {
+  if (type === "sale" || type === "for sale") {
     return price?.toLocaleString("en-NG", {
       style: "currency",
       currency: "NGN",

@@ -1,4 +1,5 @@
 "use client";
+import { Suspense } from "react";
 import { PROPERT_CATEGORIES, PROPERTY_TYPE } from "@/constants";
 import { cn } from "@/lib/utils";
 import {
@@ -17,7 +18,8 @@ import {
   PROPERTY_TYPE_ENUM,
 } from "@/constants/enum";
 
-const Filter = () => {
+// 1. Core Filtering Component
+const FilterInner = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -28,7 +30,8 @@ const Filter = () => {
     PROPERTY_TYPE_ENUM.ALL;
 
   const handleType = (type: PROPERTY_TYPE_ENUM) => {
-    const params = new URLSearchParams(searchParams);
+    // FIX: Safely cast to string before initializing constructor
+    const params = new URLSearchParams(searchParams.toString());
 
     if (type === PROPERTY_TYPE_ENUM.ALL) {
       params.delete(PROPERTY_FILTER_ENUM.TYPE);
@@ -60,20 +63,17 @@ const Filter = () => {
               key={type.id}
               onClick={() => handleType(type.name as PROPERTY_TYPE_ENUM)}
               className={cn(
-                "py-3 px-6 rounded-md font-semibold border-none transition-all",
+                "py-3 px-6 rounded-md font-semibold border-none transition-all cursor-pointer",
                 filterType === type.name
-                  ? "bg-linear-to-r from-[#2563eb] to-[#1d4ed8]"
-                  : "bg-white",
-                filterType === type.name ? "text-white" : "text-neutral-600",
-
-                filterType === type.name ? "shadow-lg" : "none"
+                  ? "bg-gradient-to-r from-[#2563eb] to-[#1d4ed8] text-white shadow-lg"
+                  : "bg-white text-neutral-600",
               )}
             >
               {type.name === "all"
                 ? "All Properties"
                 : type.name === "sale"
-                ? "For Sale"
-                : "For Rent"}
+                  ? "For Sale"
+                  : "For Rent"}
             </button>
           ))}
         </div>
@@ -82,13 +82,12 @@ const Filter = () => {
           value={filterCategory}
           onValueChange={(e) => handleCategory(e as PROPERTY_CATEGORY_ENUM)}
         >
-          <SelectTrigger className="w-45 py-5! capitalize">
+          <SelectTrigger className="w-45 py-5! capitalize bg-white">
             <SelectValue placeholder="Select Category" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Category</SelectLabel>
-
               {PROPERT_CATEGORIES.map((item) => (
                 <SelectItem
                   key={item.id}
@@ -103,6 +102,19 @@ const Filter = () => {
         </Select>
       </div>
     </div>
+  );
+};
+
+// 2. Main Wrapper with Suspense protection for Next.js builds
+const Filter = () => {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-between mt-8 flex-wrap gap-4 px-2 max-w-6xl mx-auto w-full h-[52px] animate-pulse bg-gray-100 rounded-md" />
+      }
+    >
+      <FilterInner />
+    </Suspense>
   );
 };
 

@@ -1,12 +1,19 @@
 import Heading from "@/components/admin/Heading";
-import UpdateTypeForm from "@/components/admin/types/UpdateTypeForm";
+import UpdateTypeForm from "@/components/admin/listingtypes/UpdateTypeForm";
+import GoBackBtn from "@/components/GoBackBtn";
+import { listingTypesApi } from "@/lib/api/listingTypes";
 
-const page = () => {
+const page = async ({ params }: { params: Promise<{ typeId: string }> }) => {
+  const typeId = (await params)?.typeId;
+
+  const listingType = await listingTypesApi.get(typeId);
+
   return (
     <div className="py-8 w-full">
-      <div className="max-w-4xl mx-auto">
+      <GoBackBtn />
+      <div className="max-w-2xl mx-auto">
         <Heading name="Update Type" />
-        <UpdateTypeForm />
+        <UpdateTypeForm listingType={listingType.data} />
       </div>
     </div>
   );

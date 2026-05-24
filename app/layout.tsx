@@ -3,7 +3,11 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/home/Footer";
+import "next-cloudinary/dist/cld-video-player.css";
 
+import QueryProvider from "@/lib/providers/QueryProvider";
+import { Toaster } from "react-hot-toast";
+import ScrollToTop from "@/components/ScrollToTop";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -29,9 +33,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar />
-        {children}
-        <Footer />
+        <QueryProvider>
+          <ScrollToTop />
+          <Toaster />
+          <Navbar />
+          {children}
+          <Footer />
+        </QueryProvider>
       </body>
     </html>
   );

@@ -1,13 +1,12 @@
-import Heading from "@/components/admin/Heading";
-import PropertyTable from "@/components/admin/properties/PropertyTable";
+import DashboardDetails from "@/components/admin/DashboardDetails";
 
 const page = () => {
   return (
-    <div className="py-8 w-full">
-      <div className="max-w-5xl mx-auto">
-        <Heading name="All Properties" />
-        <PropertyTable />
-      </div>
+    <div className="h-screen overflow-y-scroll pt-2  mb-32">
+      <h1 className="text-2xl font-semibold text-gray-700 dark:text-neutral-100 p-5">
+        Dashboard Overview
+      </h1>
+      <DashboardDetails />
     </div>
   );
 };

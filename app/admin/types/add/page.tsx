@@ -1,10 +1,12 @@
 import Heading from "@/components/admin/Heading";
-import AddTypeForm from "@/components/admin/types/AddTypeForm";
+import AddTypeForm from "@/components/admin/listingtypes/AddTypeForm";
+import GoBackBtn from "@/components/GoBackBtn";
 
 const page = () => {
   return (
     <div className="py-8 w-full">
-      <div className="max-w-4xl mx-auto">
+      <GoBackBtn />
+      <div className="max-w-2xl mx-auto">
         <Heading name="Add types" />
 
         <AddTypeForm />

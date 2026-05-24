@@ -16,30 +16,22 @@ import {
 import { useState } from "react";
 import { DataTablePagination } from "@/components/admin/DataTablePagination";
 
-import { PROPERTY_TYPE } from "@/constants";
-
-import { ProperyType } from "@/types/propertyType";
+import { ListingType } from "@/types/listingType";
 
 interface DataTableProps<TValue> {
-  columns: ColumnDef<ProperyType, TValue>[];
+  columns: ColumnDef<ListingType, TValue>[];
+  data: ListingType[];
 }
 
-export function DataTable<TValue>({ columns }: DataTableProps<TValue>) {
+export function DataTable<TValue>({ columns, data }: DataTableProps<TValue>) {
   const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 20 });
   const [rowSelection, setRowSelection] = useState({});
-  // const { data, isLoading } = useGetAllProductAdmin({
-  //   page: String(pagination.pageIndex + 1),
-  //   limit: String(pagination.pageSize),
-  // });
 
-  // const totalCount = data?.totalCount ?? 0;
-
-  // const pageCount = data?.totalPages;
   const isLoading = false;
   const pageCount = 1;
 
   const table = useReactTable({
-    data: PROPERTY_TYPE,
+    data,
     columns,
     pageCount,
     manualPagination: true,
@@ -60,7 +52,7 @@ export function DataTable<TValue>({ columns }: DataTableProps<TValue>) {
       {Object.entries(rowSelection).length > 0 && (
         <div className="flex items-center">
           <button className="bg-red-600 text-white py-2 px-4 rounded-md font-medium mb-2 mt-5 text-sm hover:opacity-85">
-            Delete property(s)
+            Delete listing(s)
           </button>
         </div>
       )}
@@ -75,7 +67,7 @@ export function DataTable<TValue>({ columns }: DataTableProps<TValue>) {
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
-                          header.getContext()
+                          header.getContext(),
                         )}
                   </TableHead>
                 );

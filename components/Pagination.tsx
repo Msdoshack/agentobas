@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -9,13 +9,15 @@ type PropsType = {
   totalPages: number;
 };
 
-const Pagination = ({ totalPages }: PropsType) => {
+const PaginationInner = ({ totalPages }: PropsType) => {
   const [page, setPage] = useState(1);
 
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-  const params = new URLSearchParams(searchParams);
+
+  // FIX #1: Safely cast read-only searchParams to string before initializing constructor
+  const params = new URLSearchParams(searchParams.toString());
 
   const handleNext = () => {
     const nextPage = page + 1;
@@ -33,15 +35,13 @@ const Pagination = ({ totalPages }: PropsType) => {
     }
   };
 
-  const handleNumberClick = (page: string) => {
-    params.set(PROPERTY_FILTER_ENUM.PAGE, page);
+  const handleNumberClick = (targetPage: string) => {
+    params.set(PROPERTY_FILTER_ENUM.PAGE, targetPage);
     router.push(`${pathname}?${params}`);
   };
 
   const disablePrev = page <= 1;
   const disableNext = page >= totalPages;
-
-  const currentPage = params.get(PROPERTY_FILTER_ENUM.PAGE);
 
   useEffect(() => {
     const currentPage =
@@ -61,12 +61,13 @@ const Pagination = ({ totalPages }: PropsType) => {
           Prev
         </Button>
 
+        {/* FIX #2: Compare against your verified 'page' state instead of 'currentPage' variable */}
         <Button
           size={"sm"}
           variant={"outline"}
           onClick={() => handleNumberClick("1")}
           className={cn(
-            currentPage === "1" && "bg-blue-600 text-white hover:text-white"
+            page === 1 && "bg-blue-600 text-white hover:text-white",
           )}
         >
           1
@@ -74,9 +75,7 @@ const Pagination = ({ totalPages }: PropsType) => {
 
         {totalPages > 1 && (
           <Button
-            className={cn(
-              currentPage === "2" && "brand-bg text-white hover:text-white"
-            )}
+            className={cn(page === 2 && "brand-bg text-white hover:text-white")}
             size={"sm"}
             variant={"outline"}
             onClick={() => handleNumberClick("2")}
@@ -87,9 +86,7 @@ const Pagination = ({ totalPages }: PropsType) => {
 
         {totalPages > 2 && (
           <Button
-            className={cn(
-              currentPage === "3" && "brand-bg text-white hover:text-white"
-            )}
+            className={cn(page === 3 && "brand-bg text-white hover:text-white")}
             size={"sm"}
             variant={"outline"}
             onClick={() => handleNumberClick("3")}
@@ -100,9 +97,7 @@ const Pagination = ({ totalPages }: PropsType) => {
 
         {totalPages > 3 && (
           <Button
-            className={cn(
-              currentPage === "4" && "brand-bg text-white hover:text-white"
-            )}
+            className={cn(page === 4 && "brand-bg text-white hover:text-white")}
             size={"sm"}
             variant={"outline"}
             onClick={() => handleNumberClick("4")}
@@ -112,9 +107,7 @@ const Pagination = ({ totalPages }: PropsType) => {
         )}
         {totalPages > 4 && (
           <Button
-            className={cn(
-              currentPage === "5" && "brand-bg text-white hover:text-white"
-            )}
+            className={cn(page === 5 && "brand-bg text-white hover:text-white")}
             size={"sm"}
             variant={"outline"}
             onClick={() => handleNumberClick("5")}
@@ -140,6 +133,18 @@ const Pagination = ({ totalPages }: PropsType) => {
         Page {page} of {totalPages}
       </span>
     </div>
+  );
+};
+
+const Pagination = (props: PropsType) => {
+  return (
+    <Suspense
+      fallback={
+        <div className="h-10 w-full max-w-md animate-pulse bg-gray-200 rounded-md mx-auto mt-16" />
+      }
+    >
+      <PaginationInner {...props} />
+    </Suspense>
   );
 };
 
