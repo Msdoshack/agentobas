@@ -10,15 +10,15 @@ import { useState } from "react";
 
 const menu = [
   {
-    name: "House",
-    url: `${URLS.propertiesPage}?${PROPERTY_FILTER_ENUM.CATEGORY}=${PROPERTY_CATEGORY_ENUM.HOUSE}`,
+    name: "Main",
+    url: `${URLS.homePage}`,
   },
   {
-    name: "Lands",
+    name: "Houses",
     url: `${URLS.propertiesPage}?${PROPERTY_FILTER_ENUM.CATEGORY}=${PROPERTY_CATEGORY_ENUM.LAND}`,
   },
   {
-    name: "Offices",
+    name: "Lands",
     url: `${URLS.propertiesPage}?${PROPERTY_FILTER_ENUM.CATEGORY}=${PROPERTY_CATEGORY_ENUM.OFFICE}`,
   },
   {
@@ -41,7 +41,7 @@ const HeroFilter = () => {
           key={i}
           className={cn(
             "py-1 px-4 sm:px-6 text-black rounded-none no-underline!",
-            menuIdx === i && "bg-slate-900 text-white"
+            menuIdx === i && "bg-slate-900 text-white",
           )}
           onClick={() => handleMenuClick(i, item.url)}
         >

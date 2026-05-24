@@ -157,8 +157,8 @@ const page = async ({
                 About This Property
               </h2>
 
-              <div className="flex flex-col md:flex-row gap-y-8 rounded-md">
-                <div className="w-full md:w-1/2 order-1 md:order-2">
+              <div className="flex flex-col md:flex-row rounded-md">
+                <div className="w-full md:w-1/2 order-1 md:order-2 py-2">
                   <VideoSection videos={property.videos!} />
                 </div>
 

@@ -4,7 +4,7 @@ import { CldVideoPlayer } from "next-cloudinary";
 
 const VideoSection = ({ videos }: { videos: PropertyVideo[] }) => {
   return (
-    <div className="relative  h-125 w-full max-w-125">
+    <div className="relative  max-h-125 w-full max-w-125">
       <CldVideoPlayer
         src={videos[0].publicId}
         width={500}

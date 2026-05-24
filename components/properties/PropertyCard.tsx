@@ -49,7 +49,7 @@ const PropertyCard = ({ property, isGrid = true }: PropsType) => {
 
       <Link href={`${URLS.propertiesPage}/${property.id}`}>
         <div className="p-1 sm:p-3">
-          <h3 className=" font-medium text-sm  text-gray-800">
+          <h3 className=" font-medium text-sm  text-gray-800 line-clamp-2 capitalize">
             {property.title}
           </h3>
 
