@@ -44,7 +44,7 @@ const SearchBoxInner = () => {
       />
 
       <button
-        className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 sm:px-8 py-4 rounded-xl font-semibold hover:opacity-90 transition"
+        className="bg-linear-to-r from-blue-600 to-blue-700 text-white px-4 sm:px-8 py-4 rounded-xl font-semibold hover:opacity-90 transition"
         type="submit"
       >
         Search
@@ -58,7 +58,7 @@ const SearchBox = () => {
   return (
     <Suspense
       fallback={
-        <div className="bg-gray-100 rounded-2xl h-[72px] w-full animate-pulse shadow-2xl" />
+        <div className="bg-gray-100 rounded-2xl h-18 w-full animate-pulse shadow-2xl" />
       }
     >
       <SearchBoxInner />

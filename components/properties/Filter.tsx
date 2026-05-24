@@ -65,7 +65,7 @@ const FilterInner = () => {
               className={cn(
                 "py-3 px-6 rounded-md font-semibold border-none transition-all cursor-pointer",
                 filterType === type.name
-                  ? "bg-gradient-to-r from-[#2563eb] to-[#1d4ed8] text-white shadow-lg"
+                  ? "bg-linear-to-r from-[#2563eb] to-[#1d4ed8] text-white shadow-lg"
                   : "bg-white text-neutral-600",
               )}
             >
@@ -110,7 +110,7 @@ const Filter = () => {
   return (
     <Suspense
       fallback={
-        <div className="flex items-center justify-between mt-8 flex-wrap gap-4 px-2 max-w-6xl mx-auto w-full h-[52px] animate-pulse bg-gray-100 rounded-md" />
+        <div className="flex items-center justify-between mt-8 flex-wrap gap-4 px-2 max-w-6xl mx-auto w-full h-13 animate-pulse bg-gray-100 rounded-md" />
       }
     >
       <FilterInner />
