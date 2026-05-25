@@ -1,8 +1,9 @@
 import { EXTERNAL_URLS } from "@/constants/enum";
-import { ArrowRight, Phone } from "lucide-react";
+import { /*  ArrowRight, */ Phone } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
-import LandDeals from "./LandDeals";
+// import Link from "next/link";
+// import LandDeals from "./LandDeals";
+import TransitionLink from "../TransitionLink";
 
 const Card = ({
   title,
@@ -35,9 +36,9 @@ const Card = ({
 const Body = () => {
   return (
     <div className=" max-w-6xl mx-auto mt-24 lg:mt-32">
-      <Link href={"#"} className="text-gray-600 flex items-center gap-2 px-2">
-        About Us{/*  <ArrowRight size={18} /> */}
-      </Link>
+      <p id="about" className="text-gray-600 flex items-center gap-2 px-2">
+        About Us
+      </p>
       <h4 className="font-semibold text-2xl sm:3xl lg:text-4xl mb-8 px-2">
         Dedicated to the joy of home
       </h4>
@@ -76,8 +77,6 @@ const Body = () => {
           />
         </div>
       </div>
-      {/* 
-      <LandDeals /> */}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 gap-y-16 mt-24 lg:mt-32">
         <Card
@@ -110,7 +109,10 @@ const Body = () => {
         />
       </div>
 
-      <h4 className="font-semibold text-2xl sm:3xl lg:text-4xl mt-24 lg:mt-32 mb-8">
+      <h4
+        className="font-semibold text-2xl sm:3xl lg:text-4xl mt-24 lg:mt-32 mb-8"
+        id="legal"
+      >
         Registered and Compliant
       </h4>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-2 xl:px-0 ">

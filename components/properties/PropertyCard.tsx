@@ -6,6 +6,7 @@ import { Bed, Heart, LandPlot, MapPin } from "lucide-react";
 import { CldImage } from "next-cloudinary";
 import Link from "next/link";
 import { useState } from "react";
+import TransitionLink from "../TransitionLink";
 
 type PropsType = {
   property: Property;
@@ -26,7 +27,7 @@ const PropertyCard = ({ property, isGrid = true }: PropsType) => {
         {isLoading && (
           <div className="absolute inset-0 animate-pulse bg-linear-to-r from-gray-200 via-gray-300 to-gray-200" />
         )}
-        <Link href={`${URLS.propertiesPage}/${property.id}`}>
+        <TransitionLink href={`${URLS.propertiesPage}/${property.id}`}>
           <CldImage
             src={property.images[0].publicId}
             alt="image"
@@ -36,7 +37,7 @@ const PropertyCard = ({ property, isGrid = true }: PropsType) => {
             }`}
             onLoad={() => setIsLoading(false)}
           />
-        </Link>
+        </TransitionLink>
 
         <button className="absolute top-4 right-4 bg-white p-2 rounded-full shadow-lg border-none cursor-pointer transition transform duration-200 hover:scale-110">
           <Heart size={20} />
@@ -47,7 +48,7 @@ const PropertyCard = ({ property, isGrid = true }: PropsType) => {
         </div>
       </div>
 
-      <Link href={`${URLS.propertiesPage}/${property.id}`}>
+      <TransitionLink href={`${URLS.propertiesPage}/${property.id}`}>
         <div className="p-1 sm:p-3">
           <h3 className=" font-medium text-sm  text-gray-800 line-clamp-2 capitalize">
             {property.title}
@@ -88,7 +89,7 @@ const PropertyCard = ({ property, isGrid = true }: PropsType) => {
             )}
           </div>
         </div>
-      </Link>
+      </TransitionLink>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import Heading from "@/components/admin/Heading";
 import UpdatePropertyForm from "@/components/admin/properties/UpdatePropertyForm";
+import PageReady from "@/components/PageReady";
 import { categoriesApi } from "@/lib/api/categories";
 import { listingTypesApi } from "@/lib/api/listingTypes";
 import { locationsApi } from "@/lib/api/locations";
@@ -16,17 +17,20 @@ const page = async ({
   const categories = await categoriesApi.getAll();
   const listingTypes = await listingTypesApi.getAll();
   return (
-    <div className="py-8">
-      <div className="max-w-5xl mx-auto">
-        <Heading name="Update Property" />
-        <UpdatePropertyForm
-          property={property.data}
-          listingTypes={listingTypes.data}
-          locations={locations.data}
-          categories={categories.data}
-        />
+    <>
+      <PageReady />
+      <div className="py-8">
+        <div className="max-w-5xl mx-auto">
+          <Heading name="Update Property" />
+          <UpdatePropertyForm
+            property={property.data}
+            listingTypes={listingTypes.data}
+            locations={locations.data}
+            categories={categories.data}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

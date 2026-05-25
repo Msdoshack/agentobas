@@ -7,8 +7,9 @@ import { ChevronRight, Landmark } from "lucide-react";
 import { adminNavMenu } from "@/constants";
 import { URLS } from "@/constants/enum";
 import { motion } from "motion/react";
-import { RefObject } from "react";
+import { RefObject, useTransition } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { usePageTransition } from "@/app/Providers/TransitionProvider";
 
 type PropsType = {
   ref: RefObject<HTMLDivElement | null>;
@@ -18,10 +19,27 @@ type PropsType = {
 const MobileAdminNav = ({ ref, onClose }: PropsType) => {
   const router = useRouter();
 
-  const handleClick = (url: string) => {
-    router.push(url);
+  const [isPending, startTransition] = useTransition();
+
+  const { startClosing } = usePageTransition();
+  const pathname = usePathname();
+
+  const handleNavClick = (url: string) => {
+    const targetPathname = new URL(url, window.location.origin).pathname;
+
+    const isSamePage = targetPathname === pathname;
+
+    if (!isSamePage) {
+      startClosing();
+    }
+
     onClose();
+
+    startTransition(() => {
+      router.push(url);
+    });
   };
+
   return (
     <motion.div
       className="fixed top-0 left-0 w-full flex md:hidden justify-end h-screen overflow-hidden z-50 bg-black/70 "
@@ -50,7 +68,7 @@ const MobileAdminNav = ({ ref, onClose }: PropsType) => {
 
           <div className="py-5 border-b hover:bg-gray-800/40 px-4 mb-5">
             <button
-              onClick={() => handleClick(URLS.adminPage)}
+              onClick={() => handleNavClick(URLS.adminPage)}
               className="flex items-center gap-4 text-base"
             >
               <Landmark size={18} /> Dashboard
@@ -71,7 +89,7 @@ const MobileAdminNav = ({ ref, onClose }: PropsType) => {
               <CollapsibleContent className="flex flex-col ">
                 {menu.children.map((item) => (
                   <button
-                    onClick={() => handleClick(item.href)}
+                    onClick={() => handleNavClick(item.href)}
                     key={item.id}
                     className="p-2 px-8 flex items-center gap-2 hover:bg-gray-800/40"
                   >

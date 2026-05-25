@@ -1,6 +1,7 @@
 "use client";
 
 import DeleteCategoryBtn from "@/components/admin/categories/DeleteCategoryBtn";
+import TransitionLink from "@/components/TransitionLink";
 import { Checkbox } from "@/components/ui/checkbox";
 
 import { URLS } from "@/constants/enum";
@@ -8,8 +9,6 @@ import { URLS } from "@/constants/enum";
 import { Category } from "@/types/Category";
 
 import { ColumnDef } from "@tanstack/react-table";
-
-import Link from "next/link";
 
 export const columns: ColumnDef<Category>[] = [
   {
@@ -47,10 +46,10 @@ export const columns: ColumnDef<Category>[] = [
       const name = row.getValue("name") as string;
       const id = row.original?.id;
       return (
-        <Link href={`${URLS.adminPage}/${id}`}>
+        <TransitionLink href={`${URLS.adminPage}/${id}`}>
           {name.substring(0, 30)}
           {name.length > 30 && <span> ...</span>}
-        </Link>
+        </TransitionLink>
       );
     },
   },
@@ -62,12 +61,12 @@ export const columns: ColumnDef<Category>[] = [
 
       return (
         <div className="flex items-center gap-16">
-          <Link
+          <TransitionLink
             href={`${URLS.updateCategoryPage}/${category.id}`}
             className="px-3 py-1.5 rounded-md text-white bg-gray-900"
           >
             update
-          </Link>
+          </TransitionLink>
 
           <DeleteCategoryBtn categoryId={category.id} />
         </div>

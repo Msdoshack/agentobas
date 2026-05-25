@@ -7,7 +7,9 @@ import "next-cloudinary/dist/cld-video-player.css";
 
 import QueryProvider from "@/lib/providers/QueryProvider";
 import { Toaster } from "react-hot-toast";
-import ScrollToTop from "@/components/ScrollToTop";
+// import ScrollToTop from "@/components/ScrollToTop";
+import { TransitionProvider } from "./Providers/TransitionProvider";
+import DoorOverlay from "@/components/DoorOverlay";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -33,13 +35,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <QueryProvider>
-          <ScrollToTop />
-          <Toaster />
-          <Navbar />
-          {children}
-          <Footer />
-        </QueryProvider>
+        <TransitionProvider>
+          <DoorOverlay />
+          <QueryProvider>
+            {/* <ScrollToTop /> */}
+            <Toaster />
+            <Navbar />
+            {children}
+            <Footer />
+          </QueryProvider>
+        </TransitionProvider>
       </body>
     </html>
   );

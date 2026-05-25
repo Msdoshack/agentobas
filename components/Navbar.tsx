@@ -1,8 +1,8 @@
-import Link from "next/link";
 import MobileNavIcon from "./MobileNavIcon";
 import Logo from "./home/Logo";
 import { navDesktopMenu } from "@/constants";
 import { cookies } from "next/headers";
+import TransitionLink from "./TransitionLink";
 const Navbar = async () => {
   const cookieStore = await cookies();
   const authToken = cookieStore.get("auth_token")?.value;
@@ -19,23 +19,23 @@ const Navbar = async () => {
 
         <div className=" hidden md:flex text-base items-center gap-6">
           {navDesktopMenu.map((item) => (
-            <Link
+            <TransitionLink
               className="hover:bg-white hover:text-gray-900 px-2 py-1.5 rounded-md transition-all duration-300"
               key={item.id}
               href={item.url}
             >
               {item.name}
-            </Link>
+            </TransitionLink>
           ))}
 
           {isAuthenticated && (
-            <Link
+            <TransitionLink
               href={"/admin"}
               className="p-1 px-3 rounded-md border text-green-200 hover:bg-white 
               hover:text-gray-700 hover:font-medium hidden sm:block border-white transition-all duration-300"
             >
               Admin
-            </Link>
+            </TransitionLink>
           )}
         </div>
       </div>

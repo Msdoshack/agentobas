@@ -1,6 +1,7 @@
 import UpdateLocationForm from "@/components/admin/locations/UpdateLocationForm";
 import Heading from "@/components/admin/Heading";
 import { locationsApi } from "@/lib/api/locations";
+import PageReady from "@/components/PageReady";
 
 const page = async ({
   params,
@@ -11,12 +12,15 @@ const page = async ({
   const fetchCategory = await locationsApi.get(locationId);
 
   return (
-    <div className="py-8 w-full px-4">
-      <div className="max-w-2xl mx-auto px-4">
-        <Heading name="Update Category" />
-        <UpdateLocationForm location={fetchCategory?.data} />
+    <>
+      <PageReady />
+      <div className="py-8 w-full px-4">
+        <div className="max-w-2xl mx-auto px-4">
+          <Heading name="Update Category" />
+          <UpdateLocationForm location={fetchCategory?.data} />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

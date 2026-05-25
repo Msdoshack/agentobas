@@ -38,6 +38,7 @@ import { usersApi } from "@/lib/api/users";
 import { cookies } from "next/headers";
 import RecentUsers from "./RecentUsers";
 import { propertiesApi } from "@/lib/api/properties";
+import TransitionLink from "../TransitionLink";
 
 // const apiMockData = {
 //   stats: {
@@ -362,9 +363,12 @@ const DashboardDetails = async () => {
                 Recently Added Properties
               </h3>
 
-              <Link href={URLS.allLocationPage} className="text-green-600">
+              <TransitionLink
+                href={URLS.allLocationPage}
+                className="text-green-600"
+              >
                 See all
-              </Link>
+              </TransitionLink>
             </div>
             {propertiesNew.length && propertiesNew.length > 0 ? (
               <div className="space-y-3 max-h-125 overflow-y-scroll hide-scrollbar">
@@ -392,9 +396,12 @@ const DashboardDetails = async () => {
                 <MapPin className="w-5 h-5 text-amber-500" />
                 Recent Locations
               </h3>
-              <Link href={URLS.allLocationPage} className="text-green-600">
+              <TransitionLink
+                href={URLS.allLocationPage}
+                className="text-green-600"
+              >
                 See all
-              </Link>
+              </TransitionLink>
             </div>
             {locations.data.length > 0 ? (
               <div className="space-y-3 max-h-125 overflow-y-scroll hide-scrollbar">
@@ -414,9 +421,12 @@ const DashboardDetails = async () => {
                 <HistoryIcon className="w-5 h-5 text-amber-500" />
                 Recent Categories
               </h3>
-              <Link href={URLS.allCategoryPage} className="text-green-600">
+              <TransitionLink
+                href={URLS.allCategoryPage}
+                className="text-green-600"
+              >
                 See all
-              </Link>
+              </TransitionLink>
             </div>
             {categories.data.length > 0 ? (
               <div className="space-y-3 max-h-125 overflow-y-scroll hide-scrollbar">
@@ -437,9 +447,12 @@ const DashboardDetails = async () => {
                 <Users2 className="w-5 h-5 text-amber-500" />
                 Recent Users
               </h3>
-              <Link href={URLS.allusersPage} className="text-green-600">
+              <TransitionLink
+                href={URLS.allusersPage}
+                className="text-green-600"
+              >
                 See all
-              </Link>
+              </TransitionLink>
             </div>
             {users.data.length > 0 ? (
               <div className="space-y-3 max-h-125 overflow-y-scroll hide-scrollbar">

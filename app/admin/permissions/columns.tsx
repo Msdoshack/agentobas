@@ -1,6 +1,7 @@
 "use client";
 
 import DeletePermissionBtn from "@/components/admin/permissions/DeletePermissionBtn";
+import TransitionLink from "@/components/TransitionLink";
 import { Checkbox } from "@/components/ui/checkbox";
 
 import { URLS } from "@/constants/enum";
@@ -8,8 +9,6 @@ import { URLS } from "@/constants/enum";
 import { Permission } from "@/types/permission";
 
 import { ColumnDef } from "@tanstack/react-table";
-
-import Link from "next/link";
 
 export const columns: ColumnDef<Permission>[] = [
   {
@@ -42,7 +41,9 @@ export const columns: ColumnDef<Permission>[] = [
     cell: ({ row }) => {
       const name = row.getValue("code") as string;
       const id = row.original?.id;
-      return <Link href={`${URLS.adminPage}/${id}`}>{name}</Link>;
+      return (
+        <TransitionLink href={`${URLS.adminPage}/${id}`}>{name}</TransitionLink>
+      );
     },
   },
 

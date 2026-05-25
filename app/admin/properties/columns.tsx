@@ -1,4 +1,5 @@
 "use client";
+import TransitionLink from "@/components/TransitionLink";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -47,14 +48,14 @@ export const columns: ColumnDef<Property>[] = [
       const id = row.original?.id;
       return (
         <div className="h-20 w-20 overflow-hidden relative rounded-md">
-          <Link href={`${URLS.adminAllPropertyPage}/${id}`}>
+          <TransitionLink href={`${URLS.adminAllPropertyPage}/${id}`}>
             <CldImage
               src={imgs[0].publicId}
               alt="img"
               width={100}
               height={100}
             />
-          </Link>
+          </TransitionLink>
         </div>
       );
     },
@@ -66,10 +67,13 @@ export const columns: ColumnDef<Property>[] = [
       const name = row.getValue("title") as string;
       const id = row.original?.id;
       return (
-        <Link href={`${URLS.adminAllPropertyPage}/${id}`} className="text-sm">
+        <TransitionLink
+          href={`${URLS.adminAllPropertyPage}/${id}`}
+          className="text-sm"
+        >
           {name.substring(0, 30)}
           {name.length > 30 && <span> ...</span>}
-        </Link>
+        </TransitionLink>
       );
     },
   },
@@ -148,14 +152,18 @@ export const columns: ColumnDef<Property>[] = [
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <Link href={`${URLS.adminAllPropertyPage}/${property.id}`}>
+              <TransitionLink
+                href={`${URLS.adminAllPropertyPage}/${property.id}`}
+              >
                 View Property details
-              </Link>
+              </TransitionLink>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Link href={`${URLS.adminAllPropertyPage}/${property.id}/update`}>
+              <TransitionLink
+                href={`${URLS.adminAllPropertyPage}/${property.id}/update`}
+              >
                 Update Property
-              </Link>
+              </TransitionLink>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

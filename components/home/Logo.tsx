@@ -2,6 +2,7 @@
 import { URLS } from "@/constants/enum";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import TransitionLink from "../TransitionLink";
 
 const Logo = () => {
   const pathname = usePathname();
@@ -13,9 +14,9 @@ const Logo = () => {
         : URLS.propertiesPage;
 
   return (
-    <Link href={url} className="font-extrabold text-lg">
+    <TransitionLink href={url} className="font-extrabold text-lg">
       IG OBAS
-    </Link>
+    </TransitionLink>
   );
 };
 

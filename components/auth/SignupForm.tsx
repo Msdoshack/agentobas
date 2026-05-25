@@ -21,6 +21,7 @@ import ShowPassword from "./ShowPassword";
 import ActivateUserForm from "./ActivateUserForm";
 import Link from "next/link";
 import { URLS } from "@/constants/enum";
+import TransitionLink from "../TransitionLink";
 
 // 1. Core Signup Form Logic Component
 const SignupFormInner = () => {
@@ -170,12 +171,12 @@ const SignupFormInner = () => {
 
             <p className="text-sm mt-4 text-center">
               Already have an account?{" "}
-              <Link
+              <TransitionLink
                 href={URLS.loginPage}
                 className="text-blue-600 font-medium hover:underline"
               >
                 Login
-              </Link>
+              </TransitionLink>
             </p>
           </form>
         </Form>

@@ -1,6 +1,7 @@
 "use client";
 
 import DeleteLocationBtn from "@/components/admin/locations/DeleteLocationBtn";
+import TransitionLink from "@/components/TransitionLink";
 import { Checkbox } from "@/components/ui/checkbox";
 
 import { URLS } from "@/constants/enum";
@@ -47,10 +48,10 @@ export const columns: ColumnDef<Location>[] = [
       const name = row.getValue("name") as string;
       const id = row.original?.id;
       return (
-        <Link href={`${URLS.adminPage}/${id}`}>
+        <TransitionLink href={`${URLS.adminPage}/${id}`}>
           {name.substring(0, 30)}
           {name.length > 30 && <span> ...</span>}
-        </Link>
+        </TransitionLink>
       );
     },
   },
@@ -62,12 +63,12 @@ export const columns: ColumnDef<Location>[] = [
 
       return (
         <div className="flex items-center gap-16">
-          <Link
+          <TransitionLink
             href={`${URLS.updateLocationPage}/${location.id}`}
             className="px-3 py-1.5 rounded-md text-white bg-gray-900"
           >
             update
-          </Link>
+          </TransitionLink>
 
           <DeleteLocationBtn locationId={location.id} />
         </div>

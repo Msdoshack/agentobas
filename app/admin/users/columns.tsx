@@ -2,6 +2,7 @@
 import DeleteUserBtn from "@/components/admin/users/DeleteUserBtn";
 import MakeAdminBtn from "@/components/admin/users/UpdateRoleBtn";
 import UserPermissions from "@/components/admin/users/UserPermissions";
+import TransitionLink from "@/components/TransitionLink";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -142,14 +143,14 @@ export const columns: ColumnDef<User>[] = [
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
-                <Link href={`${URLS.usersDetailsPage}/${user.id}`}>
+                <TransitionLink href={`${URLS.usersDetailsPage}/${user.id}`}>
                   View User details
-                </Link>
+                </TransitionLink>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Link href={`${URLS.updateUsersPage}/${user.id}`}>
+                <TransitionLink href={`${URLS.updateUsersPage}/${user.id}`}>
                   Update User
-                </Link>
+                </TransitionLink>
               </DropdownMenuItem>
               {/* <DropdownMenuItem>
               <DeleteUserBtn userId={String(user.id)} />

@@ -1,5 +1,6 @@
 import UpdateCategoryForm from "@/components/admin/categories/UpdateCategoryForm";
 import Heading from "@/components/admin/Heading";
+import PageReady from "@/components/PageReady";
 import { categoriesApi } from "@/lib/api/categories";
 
 const page = async ({
@@ -11,12 +12,15 @@ const page = async ({
   const fetchCategory = await categoriesApi.get(categoryId);
 
   return (
-    <div className="py-8 w-full">
-      <div className="max-w-2xl mx-auto">
-        <Heading name="Update Category" />
-        <UpdateCategoryForm category={fetchCategory?.data} />
+    <>
+      <PageReady />
+      <div className="py-8 w-full">
+        <div className="max-w-2xl mx-auto">
+          <Heading name="Update Category" />
+          <UpdateCategoryForm category={fetchCategory?.data} />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

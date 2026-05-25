@@ -1,5 +1,6 @@
 import Heading from "@/components/admin/Heading";
 import UpdateUserFormComp from "@/components/admin/users/UpdateUserForm";
+import PageReady from "@/components/PageReady";
 import { usersApi } from "@/lib/api/users";
 import { cookies } from "next/headers";
 
@@ -14,12 +15,15 @@ const page = async ({ params }: { params: Promise<{ userId: string }> }) => {
   });
 
   return (
-    <div className="py-8">
-      <div className="max-w-2xl mx-auto px-4">
-        <Heading name="Update User" />
-        <UpdateUserFormComp user={user.data} />
-      </div>
-    </div>
+    <>
+      <PageReady />
+      <div className="py-8">
+        <div className="max-w-2xl mx-auto px-4">
+          <Heading name="Update User" />
+          <UpdateUserFormComp user={user.data} />
+        </div>
+      </div>{" "}
+    </>
   );
 };
 

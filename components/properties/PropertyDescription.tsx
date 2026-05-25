@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import createDOMPurify from "dompurify";
 
 import styles from "@/components/admin/properties/PropertyDescriptionEditor.module.css";
@@ -16,6 +16,7 @@ const PropertyDescription = ({ description }: { description: string }) => {
       setSanitizedHtml(clean);
     }
   }, [description]);
+
   return (
     <div>
       <div

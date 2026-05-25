@@ -25,6 +25,7 @@ import { useActivateUser } from "@/lib/hooks/tanstack/mutations/users";
 import Lottie from "lottie-react";
 import Link from "next/link";
 import successAnimation from "@/public/ok.json";
+import TransitionLink from "../TransitionLink";
 
 type PropsType = {
   email: string;
@@ -119,12 +120,12 @@ const ActivateUserFormInner = ({ email }: PropsType) => {
           />
           <h2 className="font-semibold">Account activated!</h2>
 
-          <Link
+          <TransitionLink
             href={"/login"}
             className="bg-gray-100 px-3 py-1.5 my-4 rounded-sm text-sm font-medium hover:bg-gray-200 transition"
           >
             Login
-          </Link>
+          </TransitionLink>
         </div>
       )}
     </div>

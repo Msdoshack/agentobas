@@ -3,6 +3,7 @@ import PropertyCard from "../properties/PropertyCard";
 import { URLS } from "@/constants/enum";
 
 import { propertiesApi } from "@/lib/api/properties";
+import TransitionLink from "../TransitionLink";
 
 const RecentListing = async () => {
   const properties = await propertiesApi.getAll();
@@ -13,9 +14,9 @@ const RecentListing = async () => {
         <h3 className="font-medium text-lg sm:text-xl text-gray-700 ">
           Recent Listing
         </h3>
-        <Link href={URLS.propertiesPage} className=" text-gray-700">
+        <TransitionLink href={URLS.propertiesPage} className=" text-gray-700">
           View all
-        </Link>
+        </TransitionLink>
       </div>
 
       <div className="flex overflow-x-scroll gap-4 sm:gap-6">

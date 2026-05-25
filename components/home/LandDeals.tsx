@@ -7,6 +7,7 @@ import {
 } from "@/constants/enum";
 import { properties } from "@/constants";
 import { propertiesApi } from "@/lib/api/properties";
+import TransitionLink from "../TransitionLink";
 
 const LandDeals = async () => {
   const properties = await propertiesApi.getAll();
@@ -16,12 +17,12 @@ const LandDeals = async () => {
         <h3 className="font-medium text-lg sm:text-xl text-gray-700 ">
           Land Deals
         </h3>
-        <Link
+        <TransitionLink
           href={`${URLS.propertiesPage}?${PROPERTY_FILTER_ENUM.CATEGORY}=${PROPERTY_CATEGORY_ENUM.LAND}`}
           className=" text-gray-700"
         >
           View all
-        </Link>
+        </TransitionLink>
       </div>
 
       <div className="flex overflow-x-scroll gap-4 sm:gap-6">

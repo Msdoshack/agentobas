@@ -8,28 +8,29 @@ import Image from "next/image";
 import Link from "next/link";
 import Calendar from "react-calendar";
 import Clock from "../Clock";
+import TransitionLink from "../TransitionLink";
 
 const footerMenu = [
   {
     id: 1,
     title: "About us",
-    url: "",
+    url: "/#about",
   },
   {
     id: 2,
     title: "Terms of Service",
-    url: "",
+    url: "/#about",
   },
 
   {
     id: 3,
     title: "Privacy",
-    url: "",
+    url: "/#about",
   },
   {
     id: 4,
     title: "Legal",
-    url: "",
+    url: "/#legal",
   },
 ];
 
@@ -92,32 +93,32 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-col gap-5 sm:items-center">
-            <h1 className="font-medium underline underline-offset-8">
+            <h1 className="font-medium underline underline-offset-8 text-sm">
               Quick Links
             </h1>
             {footerMenu.map((item) => (
-              <Link href={item.url} key={item.id}>
+              <TransitionLink href={item.url} key={item.id} className="text-sm">
                 {item.title}
-              </Link>
+              </TransitionLink>
             ))}
           </div>
 
           <div className="flex flex-col gap-5 sm:items-center">
-            <h1 className="font-medium underline underline-offset-8">
+            <h1 className="font-medium underline underline-offset-8 text-sm">
               Properties
             </h1>
             {quickLinksMenu.map((item) => (
-              <Link href={item.url} key={item.id}>
+              <TransitionLink href={item.url} key={item.id} className="text-sm">
                 {item.title}
-              </Link>
+              </TransitionLink>
             ))}
           </div>
 
           <div className="flex flex-col ">
-            <p className="font-medium underline underline-offset-8">
+            <p className="font-medium underline underline-offset-8 text-sm">
               Contact Us
             </p>
-            <div className="flex flex-col mt-5  gap-5">
+            <div className="flex flex-col mt-5  gap-5 text-sm">
               {contact.map((item) => (
                 <a href={item.url} className="flex gap-2" key={item.id}>
                   <Image

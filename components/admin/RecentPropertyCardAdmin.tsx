@@ -3,8 +3,8 @@ import { formatPrice } from "@/lib/utils";
 import { Property } from "@/types/property";
 import { Eye, MapPin } from "lucide-react";
 
-import Link from "next/link";
 import CustomCldImage from "../CustomCldImage";
+import TransitionLink from "../TransitionLink";
 
 type PropsType = {
   property: Property;
@@ -12,7 +12,10 @@ type PropsType = {
 
 const RecentPropertyCardAdmin = ({ property }: PropsType) => {
   return (
-    <Link href={`${URLS.propertiesPage}/${property.id}`} className="block">
+    <TransitionLink
+      href={`${URLS.propertiesPage}/${property.id}`}
+      className="block"
+    >
       <div className="flex items-center gap-4 p-4 rounded-lg hover:bg-accent transition-all group border border-border">
         <div className="w-16 h-16 rounded-lg overflow-hidden bg-muted relative">
           <CustomCldImage
@@ -60,7 +63,7 @@ const RecentPropertyCardAdmin = ({ property }: PropsType) => {
           )}
         </div>
       </div>
-    </Link>
+    </TransitionLink>
   );
 };
 

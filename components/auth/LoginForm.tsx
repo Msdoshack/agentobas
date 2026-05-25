@@ -20,6 +20,7 @@ import Spinner from "../Spinner";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { URLS } from "@/constants/enum";
+import TransitionLink from "../TransitionLink";
 
 const LoginForm = () => {
   const { mutate, isPending, isSuccess, error } = useLogin();
@@ -104,9 +105,12 @@ const LoginForm = () => {
 
           <p>
             Don't have an account?{" "}
-            <Link href={URLS.signUp} className="text-blue-600 font-medium">
+            <TransitionLink
+              href={URLS.signUp}
+              className="text-blue-600 font-medium"
+            >
               Sign Up
-            </Link>
+            </TransitionLink>
           </p>
         </form>
       </Form>
