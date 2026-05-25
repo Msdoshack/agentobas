@@ -75,6 +75,7 @@ const MobileNavModal = ({ ref, onClose, isAuthenticated }: PropsType) => {
   const [isPending, startTransition] = useTransition();
   const { startClosing } = usePageTransition();
   const pathname = usePathname();
+
   const handleNavClick = (url: string) => {
     const targetPathname = new URL(url, window.location.origin).pathname;
 
