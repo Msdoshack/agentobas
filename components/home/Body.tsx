@@ -107,7 +107,7 @@ const Body = () => {
       </div>
 
       <h4
-        className="font-semibold text-2xl lg:3xl  mt-24 lg:mt-32 mb-4 px-4 text-center md:text-start"
+        className="font-semibold text-2xl lg:3xl  mt-24 lg:mt-32 mb-4 px-4 xl:px-0 text-center md:text-start"
         id="legal"
       >
         Registered and Compliant
@@ -139,12 +139,13 @@ const Body = () => {
             </p>
           </div>
         </div>
-        <div className="relative w-full order-1 md:order-2 h-[60vh]">
+
+        <div className="relative w-full order-1 md:order-2 h-[60vh] bg-gray-900 py-10">
           <Image
             src={"/certificate.jpg"}
             fill
             alt="agent picture "
-            className="object-contain"
+            className="object-contain py-4"
           />
         </div>
       </div>
