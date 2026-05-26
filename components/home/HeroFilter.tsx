@@ -14,7 +14,7 @@ const menu = [
   },
   {
     name: "All",
-    url: `${URLS.propertiesPage}?${PROPERTY_FILTER_ENUM.CATEGORY}=${PROPERTY_CATEGORY_ENUM.HOUSE}`,
+    url: `${URLS.propertiesPage}`,
   },
   {
     name: "Houses",
