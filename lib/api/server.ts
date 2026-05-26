@@ -1,4 +1,13 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "/api/backend";
+const getApiUrl = () => {
+  if (typeof window !== "undefined") {
+    // Client-side: use proxy
+    return "/api/backend";
+  }
+  // Server-side: hit Render directly
+  return process.env.API_URL ?? "https://ig-obas-api.onrender.com/api/v1";
+};
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? getApiUrl();
 
 export class ApiServer {
   private baseURL: string;
