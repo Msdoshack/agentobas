@@ -2,11 +2,22 @@ import PageReady from "@/components/PageReady";
 import Filter from "@/components/properties/Filter";
 import PropertyList from "@/components/properties/PropertyList";
 import SearchBox from "@/components/properties/SearchBox";
-
 import Image from "next/image";
 import { Suspense } from "react";
 
-const page = () => {
+const page = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{
+    type?: string;
+    category?: string;
+    search?: string;
+    location?: string;
+    page?: string;
+  }>;
+}) => {
+  const params = await searchParams;
+
   return (
     <>
       <PageReady />
@@ -38,7 +49,7 @@ const page = () => {
         <Filter />
 
         <Suspense fallback={"loading..."}>
-          <PropertyList />
+          <PropertyList searchParams={params} />
         </Suspense>
       </div>
     </>

@@ -1,7 +1,6 @@
 import { AllLocationResponse, SingleLocationResponse } from "@/types/api";
 import { LocationReq, UpdateLocationReq } from "@/types/locations";
 import { apiClient } from "./client";
-import { API_PREFIX } from "@/constants";
 
 export const locationsApi = {
   getAll: async (): Promise<AllLocationResponse> => {

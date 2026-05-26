@@ -1,22 +1,19 @@
 import { EXTERNAL_URLS } from "@/constants/enum";
-import { /*  ArrowRight, */ Phone } from "lucide-react";
+import { Phone } from "lucide-react";
 import Image from "next/image";
-// import Link from "next/link";
-// import LandDeals from "./LandDeals";
-import TransitionLink from "../TransitionLink";
 
 const Card = ({
   title,
   img,
   body,
-  url,
-  urlTag,
+  // url,
+  // urlTag,
 }: {
   img: string;
   title: string;
   body: string;
-  url: string;
-  urlTag: string;
+  // url: string;
+  // urlTag: string;
 }) => {
   return (
     <div className="flex flex-col gap-4 px-2 xl:px-0">
@@ -83,34 +80,34 @@ const Body = () => {
           body="Nothing beats working with a buyer's agent who can help you navigate the nuances of buying a home in your local market. From the first look to the final step, let a CENTURY 21® independent agent be there for you through every moment of the homebuying process."
           img="/buy.webp"
           title="Buying your next home"
-          url="#"
-          urlTag="Buy a home"
+          // url="#"
+          // urlTag="Buy a home"
         />
         <Card
           title="Selling your current home"
           body="When it comes to selling your home, exposure matters. As the most recognized name in real estate, the CENTURY 21® network can help you get the most value and exposure for your home."
           img="/sell.webp"
-          url="#"
-          urlTag="Sell a home"
+          // url="#"
+          // urlTag="Sell a home"
         />
         <Card
           title="Buying your next Land"
           body="When it comes to selling your home, exposure matters. As the most recognized name in real estate, the CENTURY 21® network can help you get the most value and exposure for your home."
           img="/land.webp"
-          url="#"
-          urlTag="Buy a land"
+          // url="#"
+          // urlTag="Buy a land"
         />
         <Card
           title="Selling your Land"
           body="When it comes to selling your home, exposure matters. As the most recognized name in real estate, the CENTURY 21® network can help you get the most value and exposure for your home."
           img="/land2.webp"
-          url="#"
-          urlTag="Sell a land"
+          // url="#"
+          // urlTag="Sell a land"
         />
       </div>
 
       <h4
-        className="font-semibold text-2xl sm:3xl lg:text-4xl mt-24 lg:mt-32 mb-8"
+        className="font-semibold text-2xl lg:3xl  mt-24 lg:mt-32 mb-4 px-4 text-center md:text-start"
         id="legal"
       >
         Registered and Compliant
@@ -159,8 +156,9 @@ const Body = () => {
           alt="img"
           fill
         />
+
         <div className="max-w-7xl mx-auto text-center">
-          <h3 className="text-2xl font-bold mb-8 text-center">
+          <h3 className="text-2xl font-semibold mb-8 text-center">
             Meet Your Agent
           </h3>
           <div className="flex flex-col md:flex-row gap-5">
@@ -196,7 +194,7 @@ const Body = () => {
           className="opacity-10 object-cover"
         />
         <div className="max-w-7xl mx-auto text-center ">
-          <h3 className="text-2xl font-bold mb-4">
+          <h3 className="text-xl font-semibold mb-4">
             Ready to Find Your Dream Home?
           </h3>
 

@@ -122,9 +122,10 @@ const page = async ({
                 <div className="w-full md:w-1/2">
                   <div className="flex items-start justify-between mb-6 flex-wrap gap-4">
                     <div>
-                      <h1 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-2">
+                      <h1 className="text-xl sm:text-2xl font-medium text-gray-800 mb-2">
                         {property.title}
                       </h1>
+
                       <h1 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">
                         {formatPrice(property.price, property.listingType.name)}
                       </h1>

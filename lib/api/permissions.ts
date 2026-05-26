@@ -1,6 +1,5 @@
 import { AllPermissionsResponse, SinglePermissionResponse } from "@/types/api";
 import { apiServer } from "./server";
-import { API_PREFIX } from "@/constants";
 import { apiClient } from "./client";
 import { AddPermission, Permission } from "@/types/permission";
 

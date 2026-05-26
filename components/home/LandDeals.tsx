@@ -10,7 +10,11 @@ import { propertiesApi } from "@/lib/api/properties";
 import TransitionLink from "../TransitionLink";
 
 const LandDeals = async () => {
-  const properties = await propertiesApi.getAll();
+  const properties = await propertiesApi.getAll({
+    category: "land",
+    limit: "10",
+  });
+
   return (
     <div className="mt-16 max-w-6xl mx-auto px-1">
       <div className="flex items-center justify-between mb-4 px-1">

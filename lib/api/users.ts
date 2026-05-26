@@ -1,7 +1,6 @@
 import { TokenReq } from "@/types/auth";
 import { apiClient } from "./client";
 import { AllUserResponse, SingleUserResponse } from "@/types/api";
-import { API_PREFIX } from "@/constants";
 import { apiServer } from "./server";
 
 export const usersApi = {

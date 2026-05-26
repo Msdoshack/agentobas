@@ -1,7 +1,6 @@
 import { AllCategoryResponse, SingleCategoryResponse } from "@/types/api";
 import { CategoryReq } from "@/types/Category";
 import { apiClient } from "./client";
-import { API_PREFIX } from "@/constants";
 
 export const categoriesApi = {
   getAll: async (): Promise<AllCategoryResponse> => {

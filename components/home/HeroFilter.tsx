@@ -1,17 +1,20 @@
-"use client";
 import {
   PROPERTY_CATEGORY_ENUM,
   PROPERTY_FILTER_ENUM,
   URLS,
 } from "@/constants/enum";
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+
+import TransitionLink from "../TransitionLink";
 
 const menu = [
   {
     name: "Main",
     url: `${URLS.homePage}`,
+  },
+  {
+    name: "All",
+    url: `${URLS.propertiesPage}?${PROPERTY_FILTER_ENUM.CATEGORY}=${PROPERTY_CATEGORY_ENUM.HOUSE}`,
   },
   {
     name: "Houses",
@@ -21,32 +24,26 @@ const menu = [
     name: "Lands",
     url: `${URLS.propertiesPage}?${PROPERTY_FILTER_ENUM.CATEGORY}=${PROPERTY_CATEGORY_ENUM.LAND}`,
   },
-  {
-    name: "Shops",
-    url: `${URLS.propertiesPage}?${PROPERTY_FILTER_ENUM.CATEGORY}=${PROPERTY_CATEGORY_ENUM.SHOP}`,
-  },
+  // {
+  //   name: "Shops",
+  //   url: `${URLS.propertiesPage}?${PROPERTY_FILTER_ENUM.CATEGORY}=${PROPERTY_CATEGORY_ENUM.SHOP}`,
+  // },
 ];
-const HeroFilter = () => {
-  const router = useRouter();
-  const [menuIdx, setMenuIdx] = useState(0);
 
-  const handleMenuClick = (idx: number, url: string) => {
-    setMenuIdx(idx);
-    router.push(url);
-  };
+const HeroFilter = () => {
   return (
-    <div className="my-8 bg-white  flex items-center w-fit p-1">
+    <div className="my-8 bg-white  flex items-center gap-1 w-fit p-2">
       {menu.map((item, i) => (
-        <button
+        <TransitionLink
           key={i}
           className={cn(
-            "py-1 px-4 sm:px-6 text-black rounded-none no-underline!",
-            menuIdx === i && "bg-slate-900 text-white",
+            "py-2 px-4 sm:px-6 text-sm text-black hover:bg-slate-900 hover:text-white hover:font-medium no-underline!",
+            i == 0 && "bg-slate-900 text-white font-medium",
           )}
-          onClick={() => handleMenuClick(i, item.url)}
+          href={item.url}
         >
           {item.name}
-        </button>
+        </TransitionLink>
       ))}
     </div>
   );

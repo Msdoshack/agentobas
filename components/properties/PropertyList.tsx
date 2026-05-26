@@ -1,11 +1,19 @@
-import { properties } from "@/constants";
 import Pagination from "../Pagination";
 
 import PropertyCard from "./PropertyCard";
 import { propertiesApi } from "@/lib/api/properties";
 
-const PropertyList = async () => {
-  const properties = await propertiesApi.getAll();
+type Props = {
+  searchParams: {
+    type?: string;
+    category?: string;
+    search?: string;
+    location?: string;
+    page?: string;
+  };
+};
+const PropertyList = async ({ searchParams }: Props) => {
+  const properties = await propertiesApi.getAll(searchParams);
   return (
     <div className="max-w-7xl mx-auto px-2 xl:px-0 pb-32 ">
       {properties.data.length > 0 ? (

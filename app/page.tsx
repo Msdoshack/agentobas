@@ -11,6 +11,7 @@ export default function Home() {
       <div className="min-h-screen">
         <main>
           <Hero />
+
           <RecentListing />
 
           <LandDeals />

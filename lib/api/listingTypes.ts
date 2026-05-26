@@ -3,7 +3,6 @@ import {
   SingleListingTypeResponse,
 } from "@/types/api";
 import { apiClient } from "./client";
-import { API_PREFIX } from "@/constants";
 import { ListingTypeReq, UpdateListingTypeReq } from "@/types/listingType";
 
 export const listingTypesApi = {

@@ -6,7 +6,10 @@ import { propertiesApi } from "@/lib/api/properties";
 import TransitionLink from "../TransitionLink";
 
 const RecentListing = async () => {
-  const properties = await propertiesApi.getAll();
+  const properties = await propertiesApi.getAll({
+    sort: "-created_at",
+    limit: "10",
+  });
 
   return (
     <div className="mt-16 max-w-6xl mx-auto px-1">
