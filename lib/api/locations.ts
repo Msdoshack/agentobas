@@ -5,32 +5,27 @@ import { API_PREFIX } from "@/constants";
 
 export const locationsApi = {
   getAll: async (): Promise<AllLocationResponse> => {
-    return apiClient.get<AllLocationResponse>(API_PREFIX + "/locations");
+    return apiClient.get<AllLocationResponse>("/locations");
   },
 
   get: async (id: string): Promise<SingleLocationResponse> => {
-    return apiClient.get<SingleLocationResponse>(
-      API_PREFIX + "/locations/" + id,
-    );
+    return apiClient.get<SingleLocationResponse>("/locations/" + id);
   },
 
   add: async (values: LocationReq): Promise<SingleLocationResponse> => {
-    return apiClient.post(API_PREFIX + "/locations", values);
+    return apiClient.post("/locations", values);
   },
 
   update: async ({
     id,
     name,
   }: UpdateLocationReq): Promise<SingleLocationResponse> => {
-    return apiClient.patch<SingleLocationResponse>(
-      API_PREFIX + "/locations/" + id,
-      { name },
-    );
+    return apiClient.patch<SingleLocationResponse>("/locations/" + id, {
+      name,
+    });
   },
 
   delete: async (id: string): Promise<{ message: string }> => {
-    return apiClient.delete<{ message: string }>(
-      API_PREFIX + "/locations/" + id,
-    );
+    return apiClient.delete<{ message: string }>("/locations/" + id);
   },
 };

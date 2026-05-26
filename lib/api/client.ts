@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "/api/backend";
 
 export class ApiClient {
   private baseURL: string;
@@ -15,7 +15,7 @@ export class ApiClient {
 
     const config: RequestInit = {
       ...options,
-      credentials: "include", // Important: Send cookies
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
         ...options.headers,
@@ -46,6 +46,7 @@ export class ApiClient {
     return this.request<T>(endpoint, {
       ...options,
       method: "POST",
+
       body: data ? JSON.stringify(data) : undefined,
     });
   }

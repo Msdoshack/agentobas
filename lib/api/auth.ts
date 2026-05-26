@@ -4,10 +4,7 @@ import type { SingleUserResponse } from "@/types/api";
 
 export const authApi = {
   login: async (credentials: LoginRequest): Promise<SingleUserResponse> => {
-    return apiClient.post<SingleUserResponse>(
-      "/api/v1/auth/login",
-      credentials,
-    );
+    return apiClient.post<SingleUserResponse>("/auth/login", credentials);
   },
 
   register: async (data: RegisterRequest): Promise<SingleUserResponse> => {

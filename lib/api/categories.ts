@@ -5,17 +5,15 @@ import { API_PREFIX } from "@/constants";
 
 export const categoriesApi = {
   getAll: async (): Promise<AllCategoryResponse> => {
-    return apiClient.get<AllCategoryResponse>(API_PREFIX + "/categories");
+    return apiClient.get<AllCategoryResponse>("/categories");
   },
 
   get: async (id: string): Promise<SingleCategoryResponse> => {
-    return apiClient.get<SingleCategoryResponse>(
-      API_PREFIX + "/categories/" + id,
-    );
+    return apiClient.get<SingleCategoryResponse>("/categories/" + id);
   },
 
   add: async (values: CategoryReq): Promise<SingleCategoryResponse> => {
-    return apiClient.post(API_PREFIX + "/categories", values);
+    return apiClient.post("/categories", values);
   },
 
   update: async ({
@@ -25,15 +23,12 @@ export const categoriesApi = {
     id: string;
     name: string;
   }): Promise<SingleCategoryResponse> => {
-    return apiClient.patch<SingleCategoryResponse>(
-      API_PREFIX + "/categories/" + id,
-      { name },
-    );
+    return apiClient.patch<SingleCategoryResponse>("/categories/" + id, {
+      name,
+    });
   },
 
   delete: async (id: string): Promise<{ message: string }> => {
-    return apiClient.delete<{ message: string }>(
-      API_PREFIX + "/categories/" + id,
-    );
+    return apiClient.delete<{ message: string }>("/categories/" + id);
   },
 };

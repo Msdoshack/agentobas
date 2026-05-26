@@ -6,44 +6,41 @@ import { AddPermission, Permission } from "@/types/permission";
 
 export const permissionsApi = {
   getAll: (cookieHeader: string): Promise<AllPermissionsResponse> => {
-    return apiServer.get(API_PREFIX + "/permissions", cookieHeader);
+    return apiServer.get("/permissions", cookieHeader);
   },
   getAllClient: (): Promise<AllPermissionsResponse> => {
-    return apiClient.get(API_PREFIX + "/permissions");
+    return apiClient.get("/permissions");
   },
 
   get: (values: {
     cookieHeader: string;
     id: string;
   }): Promise<SinglePermissionResponse> => {
-    return apiServer.get(
-      API_PREFIX + "/permissions/" + values.id,
-      values.cookieHeader,
-    );
+    return apiServer.get("/permissions/" + values.id, values.cookieHeader);
   },
 
   getForUser: (userId: string): Promise<{ data: string[] }> => {
-    return apiClient.get(API_PREFIX + `/users/${userId}/permissions`);
+    return apiClient.get(`/users/${userId}/permissions`);
   },
 
   add: (values: AddPermission) => {
-    return apiClient.post(API_PREFIX + "/permissions", values);
+    return apiClient.post("/permissions", values);
   },
 
   update: (values: Permission) => {
-    return apiClient.patch(API_PREFIX + "/permissions/" + values.id, {
+    return apiClient.patch("/permissions/" + values.id, {
       code: values.code,
     });
   },
 
   updateForUser: (values: { permission: AddPermission; userId: string }) => {
-    return apiClient.patch(API_PREFIX + `/users/${values.userId}/permissions`, {
+    return apiClient.patch(`/users/${values.userId}/permissions`, {
       code: values.permission.code,
     });
   },
 
   delete: (permissionId: string) => {
-    return apiClient.delete(API_PREFIX + "/permissions/" + permissionId);
+    return apiClient.delete("/permissions/" + permissionId);
   },
 
   deleteForUser: ({
@@ -53,8 +50,6 @@ export const permissionsApi = {
     userId: string;
     permissionId: string;
   }) => {
-    return apiClient.delete(
-      API_PREFIX + `/users/${userId}/permissions/${permissionId}`,
-    );
+    return apiClient.delete(`/users/${userId}/permissions/${permissionId}`);
   },
 };

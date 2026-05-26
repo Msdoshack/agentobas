@@ -6,7 +6,7 @@ import { apiServer } from "./server";
 
 export const usersApi = {
   getAll: async (cookie: string): Promise<AllUserResponse> => {
-    return apiServer.get<AllUserResponse>(API_PREFIX + "/users", cookie);
+    return apiServer.get<AllUserResponse>("/users", cookie);
   },
 
   get: async ({
@@ -16,20 +16,14 @@ export const usersApi = {
     id: string;
     cookieHeader: string;
   }): Promise<SingleUserResponse> => {
-    return apiServer.get<SingleUserResponse>(
-      API_PREFIX + "/users/" + id,
-      cookieHeader,
-    );
+    return apiServer.get<SingleUserResponse>("/users/" + id, cookieHeader);
   },
 
   activate: async (token: TokenReq): Promise<SingleUserResponse> => {
-    return apiClient.put<SingleUserResponse>(
-      API_PREFIX + "/users/activate",
-      token,
-    );
+    return apiClient.put<SingleUserResponse>("/users/activate", token);
   },
 
   delete: async (id: string): Promise<{ message: string }> => {
-    return apiClient.delete<{ message: string }>(API_PREFIX + "/users/" + id);
+    return apiClient.delete<{ message: string }>("/users/" + id);
   },
 };
