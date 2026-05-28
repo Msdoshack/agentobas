@@ -8,6 +8,7 @@ import QueryProvider from "@/lib/providers/QueryProvider";
 import { Toaster } from "react-hot-toast";
 import { TransitionProvider } from "./Providers/TransitionProvider";
 import DoorOverlay from "@/components/DoorOverlay";
+import { AnalyticsTracker } from "@/components/AnalyticsTracker";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -34,6 +35,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <TransitionProvider>
+          <AnalyticsTracker />
           <DoorOverlay />
           <QueryProvider>
             <Toaster />

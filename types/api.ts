@@ -2,7 +2,7 @@ import { Category } from "./Category";
 import { ListingType } from "./listingType";
 import { Location } from "./locations";
 import { Permission } from "./permission";
-import { Metadata, Property } from "./property";
+import { PropertyMetadata, Property } from "./property";
 import { User } from "./user";
 
 export interface ApiResponse<T> {
@@ -13,7 +13,7 @@ export interface ApiResponse<T> {
 
 export interface AllPropertyResponse {
   data: Property[];
-  metadata: Metadata;
+  metadata: PropertyMetadata;
 }
 
 export interface SinglePropertyResponse {

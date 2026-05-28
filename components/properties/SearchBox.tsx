@@ -9,22 +9,20 @@ const SearchBoxInner = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-  const currSearch = searchParams.get("search") || "";
+  const currSearch = searchParams.get(PROPERTY_FILTER_ENUM.SEARCH) || "";
   const [searchTerm, setSearchTerm] = useState(currSearch);
 
   const handleSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Convert current params to a mutable instance
     const params = new URLSearchParams(searchParams.toString());
 
     if (searchTerm.trim()) {
       params.set(PROPERTY_FILTER_ENUM.SEARCH, searchTerm.trim());
     } else {
-      params.delete(PROPERTY_FILTER_ENUM.SEARCH); // Clears parameter if search is empty
+      params.delete(PROPERTY_FILTER_ENUM.SEARCH);
     }
 
-    // Retain any existing filters (like page or category) while searching
     router.push(`${pathname}?${params.toString()}`);
   };
 

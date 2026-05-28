@@ -77,32 +77,24 @@ const Body = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 gap-y-16 mt-24 lg:mt-32">
         <Card
-          body="Nothing beats working with a buyer's agent who can help you navigate the nuances of buying a home in your local market. From the first look to the final step, let a CENTURY 21® independent agent be there for you through every moment of the homebuying process."
+          body="Nothing beats working with a buyer's agent who can help you navigate the nuances of buying a home in your local market. From the first look to the final step, let IG OBAS an independent agent be there for you through every moment of the homebuying process."
           img="/buy.webp"
           title="Buying your next home"
-          // url="#"
-          // urlTag="Buy a home"
         />
         <Card
           title="Selling your current home"
-          body="When it comes to selling your home, exposure matters. As the most recognized name in real estate, the CENTURY 21® network can help you get the most value and exposure for your home."
+          body="When it comes to selling your home, exposure matters. As the most recognized name in real estate, IG OBAS network can help you get the most value and exposure for your home."
           img="/sell.webp"
-          // url="#"
-          // urlTag="Sell a home"
         />
         <Card
           title="Buying your next Land"
-          body="When it comes to selling your home, exposure matters. As the most recognized name in real estate, the CENTURY 21® network can help you get the most value and exposure for your home."
+          body="When it comes to selling your home, exposure matters. As the most recognized name in real estate, IG OBAS network can help you get the most value and exposure for your home."
           img="/land.webp"
-          // url="#"
-          // urlTag="Buy a land"
         />
         <Card
           title="Selling your Land"
-          body="When it comes to selling your home, exposure matters. As the most recognized name in real estate, the CENTURY 21® network can help you get the most value and exposure for your home."
+          body="When it comes to selling your home, exposure matters. As the most recognized name in real estate, IG OBAS network can help you get the most value and exposure for your home."
           img="/land2.webp"
-          // url="#"
-          // urlTag="Sell a land"
         />
       </div>
 
@@ -164,7 +156,7 @@ const Body = () => {
           </h3>
           <div className="flex flex-col md:flex-row gap-5">
             <div className="w-full md:w-1/2 order-2 md:order-1 ">
-              <p className="text-justify px-4 text-base leading-9">
+              <p className="text-start px-4 text-base leading-10">
                 I&apos;m <strong>Ichani Gift Obas, </strong> a passionate real
                 estate agent who believes that property ownership should be
                 simple, transparent, and rewarding. I work closely with my
@@ -175,7 +167,8 @@ const Body = () => {
                 support from start to finish.
               </p>
             </div>
-            <div className="relative  h-80 aspect-9/6 order-1 md:order-2 ">
+
+            <div className="relative  h-96 w-full md:w-1/2 order-1 md:order-2 ">
               <Image
                 src={"/obas.jpg"}
                 alt="Agent obas"

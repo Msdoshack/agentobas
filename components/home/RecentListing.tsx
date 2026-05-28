@@ -14,10 +14,13 @@ const RecentListing = async () => {
   return (
     <div className="mt-16 max-w-6xl mx-auto px-1">
       <div className="flex items-center justify-between mb-4 px-1">
-        <h3 className="font-medium text-lg sm:text-xl text-gray-700 ">
+        <h3 className="font-medium sm:text-xl text-gray-700 ">
           Recent Listing
         </h3>
-        <TransitionLink href={URLS.propertiesPage} className=" text-gray-700">
+        <TransitionLink
+          href={URLS.propertiesPage}
+          className=" text-gray-700 text-sm"
+        >
           View all
         </TransitionLink>
       </div>

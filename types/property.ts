@@ -57,15 +57,17 @@ export interface UpdateProperty {
   isAvailable: boolean;
 }
 
-export interface PropertyFilters {
-  page: number;
-  limit: number;
-  sort: string;
-  category: number;
-  listingType: number;
+export interface PropertyFilterParams {
+  page?: string;
+  limit?: string;
+  sort?: string;
+  category?: string;
+  listingType?: string;
+  location?: string;
+  search?: string;
 }
 
-export interface Metadata {
+export interface PropertyMetadata {
   currentPage: number;
   firstPage: number;
   lastPage: number;

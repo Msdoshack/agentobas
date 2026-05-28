@@ -1,136 +1,144 @@
 "use client";
-import { useEffect, useState, Suspense } from "react";
+import { Suspense, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { PROPERTY_FILTER_ENUM } from "@/constants/enum";
+import { PropertyMetadata } from "@/types/property";
 
 type PropsType = {
-  totalPages: number;
+  metadata: PropertyMetadata;
 };
 
-const PaginationInner = ({ totalPages }: PropsType) => {
-  const [page, setPage] = useState(1);
-
+const PaginationInner = ({ metadata }: PropsType) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
-  // FIX #1: Safely cast read-only searchParams to string before initializing constructor
-  const params = new URLSearchParams(searchParams.toString());
+  const currentPage = useMemo(() => {
+    const p = Number(searchParams.get(PROPERTY_FILTER_ENUM.PAGE)) || 1;
 
-  const handleNext = () => {
-    const nextPage = page + 1;
-    if (nextPage <= totalPages) {
-      params.set(PROPERTY_FILTER_ENUM.PAGE, nextPage.toString());
-      router.replace(`${pathname}?${params}`);
+    return Math.max(1, Math.min(p, metadata.lastPage || 1));
+  }, [searchParams, metadata.lastPage]);
+
+  // sliding window array
+  const pageNumbers = useMemo(() => {
+    const total = metadata.lastPage;
+    const current = currentPage;
+
+    if (total <= 1) return [];
+
+    const maxVisible = 5;
+    let start = Math.max(1, current - Math.floor(maxVisible / 2));
+    let end = Math.min(total, start + maxVisible - 1);
+
+    // Adjust start boundary if overflow constraints apply near the final page
+    if (end - start + 1 < maxVisible) {
+      start = Math.max(1, end - maxVisible + 1);
     }
-  };
 
-  const handlePrev = () => {
-    const prevPage = page - 1;
-    if (prevPage >= 1) {
-      params.set(PROPERTY_FILTER_ENUM.PAGE, prevPage.toString());
-      router.replace(`${pathname}?${params}`);
+    const pages: number[] = [];
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
     }
+
+    return pages;
+  }, [currentPage, metadata.lastPage]);
+
+  const navigateToPage = (targetPage: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    params.set(PROPERTY_FILTER_ENUM.PAGE, targetPage.toString());
+
+    router.push(`${pathname}?${params.toString()}`);
   };
 
-  const handleNumberClick = (targetPage: string) => {
-    params.set(PROPERTY_FILTER_ENUM.PAGE, targetPage);
-    router.push(`${pathname}?${params}`);
-  };
-
-  const disablePrev = page <= 1;
-  const disableNext = page >= totalPages;
-
-  useEffect(() => {
-    const currentPage =
-      Number(searchParams.get(PROPERTY_FILTER_ENUM.PAGE)) || 1;
-    setPage(currentPage);
-  }, [searchParams]);
+  // If there's only 1 page or none, cleanly strip pagination nodes from rendering tree
+  if (metadata.lastPage <= 1) return null;
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4 mt-16">
-      <div className="flex items-center gap-4">
+    <div className="flex flex-col items-center justify-center gap-4 mt-16 select-none">
+      <div className="flex items-center gap-2">
+        {/* Prev Button */}
         <Button
-          disabled={disablePrev}
-          onClick={handlePrev}
-          variant={"outline"}
-          className="brand-color"
+          disabled={currentPage <= 1}
+          onClick={() => navigateToPage(currentPage - 1)}
+          variant="outline"
+          size="sm"
+          className="brand-color font-medium cursor-pointer"
         >
           Prev
         </Button>
 
-        {/* FIX #2: Compare against your verified 'page' state instead of 'currentPage' variable */}
+        {/* First Page Left Ellipsis Cap */}
+        {pageNumbers[0] > 1 && (
+          <>
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => navigateToPage(1)}
+              className="cursor-pointer"
+            >
+              1
+            </Button>
+            {pageNumbers[0] > 2 && (
+              <span className="text-slate-400 px-1 text-sm font-medium">
+                ...
+              </span>
+            )}
+          </>
+        )}
+
+        {/* Dynamic Window Track Loop */}
+        {pageNumbers.map((p) => (
+          <Button
+            key={p}
+            size="sm"
+            variant="outline"
+            onClick={() => navigateToPage(p)}
+            className={cn(
+              "font-medium transition-all duration-200 cursor-pointer min-w-9",
+              currentPage === p &&
+                "bg-blue-600 text-white hover:bg-blue-700 hover:text-white border-blue-600 shadow-xs",
+            )}
+          >
+            {p}
+          </Button>
+        ))}
+
+        {/* Last Page Right Ellipsis Cap */}
+        {pageNumbers[pageNumbers.length - 1] < metadata.lastPage && (
+          <>
+            {pageNumbers[pageNumbers.length - 1] < metadata.lastPage - 1 && (
+              <span className="text-slate-400 px-1 text-sm font-medium">
+                ...
+              </span>
+            )}
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => navigateToPage(metadata.lastPage)}
+              className="cursor-pointer"
+            >
+              {metadata.lastPage}
+            </Button>
+          </>
+        )}
+
+        {/* Next Button */}
         <Button
-          size={"sm"}
-          variant={"outline"}
-          onClick={() => handleNumberClick("1")}
-          className={cn(
-            page === 1 && "bg-blue-600 text-white hover:text-white",
-          )}
-        >
-          1
-        </Button>
-
-        {totalPages > 1 && (
-          <Button
-            className={cn(page === 2 && "brand-bg text-white hover:text-white")}
-            size={"sm"}
-            variant={"outline"}
-            onClick={() => handleNumberClick("2")}
-          >
-            2
-          </Button>
-        )}
-
-        {totalPages > 2 && (
-          <Button
-            className={cn(page === 3 && "brand-bg text-white hover:text-white")}
-            size={"sm"}
-            variant={"outline"}
-            onClick={() => handleNumberClick("3")}
-          >
-            3
-          </Button>
-        )}
-
-        {totalPages > 3 && (
-          <Button
-            className={cn(page === 4 && "brand-bg text-white hover:text-white")}
-            size={"sm"}
-            variant={"outline"}
-            onClick={() => handleNumberClick("4")}
-          >
-            4
-          </Button>
-        )}
-        {totalPages > 4 && (
-          <Button
-            className={cn(page === 5 && "brand-bg text-white hover:text-white")}
-            size={"sm"}
-            variant={"outline"}
-            onClick={() => handleNumberClick("5")}
-          >
-            5
-          </Button>
-        )}
-
-        {totalPages > 5 && (
-          <span className="bg-white rounded-sm px-2 py-0.5">...</span>
-        )}
-
-        <Button
-          disabled={disableNext}
-          onClick={handleNext}
-          variant={"outline"}
-          className="brand-color"
+          disabled={currentPage >= metadata.lastPage}
+          onClick={() => navigateToPage(currentPage + 1)}
+          variant="outline"
+          size="sm"
+          className="brand-color font-medium cursor-pointer"
         >
           Next
         </Button>
       </div>
-      <span className="text-sm text-gray-600">
-        Page {page} of {totalPages}
+
+      <span className="text-xs font-medium text-slate-500 bg-slate-50 border border-slate-100 px-2.5 py-1 rounded-full">
+        Page {currentPage} of {metadata.lastPage}
       </span>
     </div>
   );
@@ -140,7 +148,7 @@ const Pagination = (props: PropsType) => {
   return (
     <Suspense
       fallback={
-        <div className="h-10 w-full max-w-md animate-pulse bg-gray-200 rounded-md mx-auto mt-16" />
+        <div className="h-10 w-full max-w-sm animate-pulse bg-slate-100 rounded-lg mx-auto mt-16 border border-slate-50" />
       }
     >
       <PaginationInner {...props} />

@@ -56,7 +56,7 @@ const FilterInner = () => {
 
   return (
     <div>
-      <div className="flex items-center justify-between mt-8 flex-wrap gap-4 px-2 max-w-6xl mx-auto">
+      <div className="flex items-center justify-between mt-8 flex-wrap gap-4 px-2 max-w-6xl mx-auto mb-5">
         <div className="flex gap-3 flex-wrap">
           {PROPERTY_TYPE.map((type) => (
             <button

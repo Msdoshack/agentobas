@@ -60,8 +60,10 @@ export enum PROPERTY_CATEGORY_ENUM {
 }
 
 export enum PROPERTY_FILTER_ENUM {
-  TYPE = "type",
+  TYPE = "listingType",
   CATEGORY = "category",
   PAGE = "page",
   SEARCH = "search",
+  LIMIT = "limit",
+  SORT = "sort",
 }

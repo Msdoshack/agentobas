@@ -1,30 +1,28 @@
 import { AllPropertyResponse, SinglePropertyResponse } from "@/types/api";
-import { AddProperty, UpdateProperty } from "@/types/property";
+import {
+  AddProperty,
+  PropertyFilterParams,
+  UpdateProperty,
+} from "@/types/property";
 import { apiClient } from "./client";
 
 export const propertiesApi = {
-  getAll: async (query?: {
-    type?: string;
-    category?: string;
-    search?: string;
-    location?: string;
-    page?: string;
-    sort?: string;
-    limit?: string;
-  }): Promise<AllPropertyResponse> => {
+  getAll: async (
+    query?: PropertyFilterParams,
+  ): Promise<AllPropertyResponse> => {
     const searchParams = new URLSearchParams();
 
     if (query?.category) {
       searchParams.set("category", query.category);
     }
-    if (query?.type) {
-      searchParams.set("listingType", query.type);
+    if (query?.listingType) {
+      searchParams.set("listingType", query.listingType);
     }
     if (query?.location) {
       searchParams.set("location", query.location);
     }
     if (query?.search) {
-      searchParams.set("search", query.search);
+      searchParams.set("title", query.search);
     }
     if (query?.page) {
       searchParams.set("page", query.page);

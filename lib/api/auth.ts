@@ -8,10 +8,10 @@ export const authApi = {
   },
 
   register: async (data: RegisterRequest): Promise<SingleUserResponse> => {
-    return apiClient.post<SingleUserResponse>("/api/v1/auth/register", data);
+    return apiClient.post<SingleUserResponse>("/auth/register", data);
   },
 
   logout: async (): Promise<{ message: string }> => {
-    return apiClient.post<{ message: string }>("/api/v1/auth/logout");
+    return apiClient.post<{ message: string }>("/auth/logout");
   },
 };

@@ -26,7 +26,7 @@ import NoData from "@/components/admin/NoData";
 // import LoadingComponent from "../LoadingComponent";
 // import { formatNGN } from "@/lib/utils";
 import Image from "next/image";
-import { properties, propertiesNew } from "@/constants";
+
 import RecentPropertyCardAdmin from "./RecentPropertyCardAdmin";
 import { ListingType } from "./ListingType";
 import { locationsApi } from "@/lib/api/locations";
@@ -39,6 +39,7 @@ import { cookies } from "next/headers";
 import RecentUsers from "./RecentUsers";
 import { propertiesApi } from "@/lib/api/properties";
 import TransitionLink from "../TransitionLink";
+import { analyticsApi } from "@/lib/api/analytics";
 
 // const apiMockData = {
 //   stats: {
@@ -273,7 +274,13 @@ const DashboardDetails = async () => {
   const auth_cookie = cookie.get("auth_token");
   const locations = await locationsApi.getAll();
   const categories = await categoriesApi.getAll();
-  const properties = await propertiesApi.getAll();
+  const properties = await propertiesApi.getAll({
+    sort: "-created_at",
+    limit: "10",
+  });
+
+  const visitors = await analyticsApi.getAnalyticsMetrics();
+
   const users = await usersApi.getAll(
     `${auth_cookie?.name}=${auth_cookie?.value}`,
   );
@@ -297,7 +304,7 @@ const DashboardDetails = async () => {
 
       totalVisitors: {
         label: "Total Visitors",
-        value: "100",
+        value: visitors.data.totalUniqueVisitors.toString(),
       },
     },
   };
@@ -370,7 +377,7 @@ const DashboardDetails = async () => {
                 See all
               </TransitionLink>
             </div>
-            {propertiesNew.length && propertiesNew.length > 0 ? (
+            {properties.data && properties.data.length > 0 ? (
               <div className="space-y-3 max-h-125 overflow-y-scroll hide-scrollbar">
                 {properties.data.map((property, i) => (
                   <RecentPropertyCardAdmin property={property} key={i} />
