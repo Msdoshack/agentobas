@@ -1,7 +1,3 @@
-// import { SalesAndRefundDashboardStats } from "@/components/admin/charts/SalesAndRefundDashboardStats.tsx";
-// import WebsiteVisitorsChart from "../../components/admin/charts/WebsiteVisitorsChart";
-// import { ChartPieDonutText } from "../../components/admin/charts/ChartPieDonutText";
-// import { TopSellingBrand } from "../../components/admin/charts/TopSellingBrand";
 import {
   ArrowUpDown,
   Box,
@@ -279,7 +275,9 @@ const DashboardDetails = async () => {
     limit: "10",
   });
 
-  const visitors = await analyticsApi.getAnalyticsMetrics();
+  const visitors = await analyticsApi.getAnalyticsMetrics(
+    `${auth_cookie?.name}=${auth_cookie?.value}`,
+  );
 
   const users = await usersApi.getAll(
     `${auth_cookie?.name}=${auth_cookie?.value}`,

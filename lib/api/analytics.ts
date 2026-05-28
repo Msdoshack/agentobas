@@ -1,12 +1,13 @@
 import { AnalyticsResponse } from "@/types/analytics";
 import { apiClient } from "./client";
+import { apiServer } from "./server";
 
 export const analyticsApi = {
   trackActivity: async () => {
     return apiClient.post("/analytics/track");
   },
 
-  getAnalyticsMetrics: async (): Promise<AnalyticsResponse> => {
-    return apiClient.get("/analytics/overview", { cache: "no-store" });
+  getAnalyticsMetrics: async (cookie: string): Promise<AnalyticsResponse> => {
+    return apiServer.get("/analytics/overview", cookie, { cache: "no-store" });
   },
 };
