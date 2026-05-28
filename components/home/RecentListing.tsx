@@ -1,9 +1,5 @@
-import Link from "next/link";
 import PropertyCard from "../properties/PropertyCard";
-import { URLS } from "@/constants/enum";
-
 import { propertiesApi } from "@/lib/api/properties";
-import TransitionLink from "../TransitionLink";
 
 const RecentListing = async () => {
   const properties = await propertiesApi.getAll({
@@ -12,24 +8,10 @@ const RecentListing = async () => {
   });
 
   return (
-    <div className="mt-16 max-w-6xl mx-auto px-1">
-      <div className="flex items-center justify-between mb-4 px-1">
-        <h3 className="font-medium sm:text-xl text-gray-700 ">
-          Recent Listing
-        </h3>
-        <TransitionLink
-          href={URLS.propertiesPage}
-          className=" text-gray-700 text-sm"
-        >
-          View all
-        </TransitionLink>
-      </div>
-
-      <div className="flex overflow-x-scroll gap-4 sm:gap-6">
-        {properties.data.map((item) => (
-          <PropertyCard isGrid={false} property={item} key={item.id} />
-        ))}
-      </div>
+    <div className="flex overflow-x-scroll gap-4">
+      {properties.data.map((item) => (
+        <PropertyCard isGrid={false} property={item} key={item.id} />
+      ))}
     </div>
   );
 };

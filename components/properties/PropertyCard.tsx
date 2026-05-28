@@ -4,7 +4,6 @@ import { cn, formatPrice } from "@/lib/utils";
 import { Property } from "@/types/property";
 import { Bed, Heart, LandPlot, MapPin } from "lucide-react";
 import { CldImage } from "next-cloudinary";
-import Link from "next/link";
 import { useState } from "react";
 import TransitionLink from "../TransitionLink";
 
@@ -20,12 +19,21 @@ const PropertyCard = ({ property, isGrid = true }: PropsType) => {
     <div
       className={cn(
         "bg-white rounded-md shadow-lg cursor-pointer transition-all hover:transform hover:-translate-y-2",
-        !isGrid && "min-w-56 flex-nowrap",
+        !isGrid && "min-w-60 flex-nowrap",
       )}
     >
-      <div className="relative h-56 flex items-center justify-center">
+      <div
+        className={cn(
+          "relative h-56 flex items-center justify-center",
+          !isGrid && "w-60",
+        )}
+      >
         {isLoading && (
-          <div className="absolute inset-0 animate-pulse bg-linear-to-r from-gray-200 via-gray-300 to-gray-200" />
+          <div
+            className={
+              "absolute inset-0 animate-pulse bg-linear-to-r from-gray-200 via-gray-300 to-gray-200"
+            }
+          />
         )}
         <TransitionLink href={`${URLS.propertiesPage}/${property.id}`}>
           <CldImage
@@ -49,7 +57,7 @@ const PropertyCard = ({ property, isGrid = true }: PropsType) => {
       </div>
 
       <TransitionLink href={`${URLS.propertiesPage}/${property.id}`}>
-        <div className="p-1 sm:p-3">
+        <div className={cn("p-1 sm:p-3", !isGrid && "w-60")}>
           <h3 className=" font-medium text-sm  text-gray-800 line-clamp-2 capitalize">
             {property.title}
           </h3>

@@ -5,7 +5,7 @@ import {
   URLS,
 } from "@/constants/enum";
 import Image from "next/image";
-import Link from "next/link";
+
 import Calendar from "react-calendar";
 import Clock from "../Clock";
 import TransitionLink from "../TransitionLink";
@@ -38,19 +38,19 @@ const quickLinksMenu = [
   {
     id: 1,
     title: "Lands",
-    url: `${URLS.propertiesPage}?type=${PROPERTY_TYPE_ENUM.SALE}&category=${PROPERTY_CATEGORY_ENUM.LAND}`,
+    url: `${URLS.propertiesPage}?category=${PROPERTY_CATEGORY_ENUM.LAND}`,
   },
 
   {
     id: 2,
     title: "Houses",
-    url: `${URLS.propertiesPage}?type=${PROPERTY_TYPE_ENUM.SALE}&category=${PROPERTY_CATEGORY_ENUM.HOUSE}`,
+    url: `${URLS.propertiesPage}?category=${PROPERTY_CATEGORY_ENUM.HOUSE}`,
   },
 
   {
     id: 3,
     title: "Shops",
-    url: `${URLS.propertiesPage}?type=${PROPERTY_TYPE_ENUM.RENT}&category=${PROPERTY_CATEGORY_ENUM.HOUSE}`,
+    url: `${URLS.propertiesPage}?category=${PROPERTY_CATEGORY_ENUM.SHOP}`,
   },
 
   { id: 4, title: "All properties", url: `${URLS.propertiesPage}` },
@@ -72,7 +72,7 @@ const contact = [
   },
   {
     id: 4,
-    title: "igobas@gmail.com",
+    title: "giftichani@gmail.com",
     url: EXTERNAL_URLS.email,
     img: "/email.png",
   },
@@ -89,7 +89,10 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-y-12 mt-8">
           <div className=" bg-slate-800 text-white p-4 rounded-md decoration-none">
             <Clock />
-            <Calendar locale="en-NG" value={new Date()} />
+
+            <div className="[&_.react-calendar\_\_month-view\_\_weekdays\_\_weekday_abbr]:no-underline mt-4">
+              <Calendar locale="en-NG" value={new Date()} />
+            </div>
           </div>
 
           <div className="flex flex-col gap-5 sm:items-center">

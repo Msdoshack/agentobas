@@ -1,6 +1,7 @@
 import PageReady from "@/components/PageReady";
 import Filter from "@/components/properties/Filter";
 import PropertyList from "@/components/properties/PropertyList";
+import PropertyListSkeleton from "@/components/properties/PropertyListSkeleton";
 import SearchBox from "@/components/properties/SearchBox";
 import { PropertyFilterParams } from "@/types/property";
 import Image from "next/image";
@@ -43,7 +44,7 @@ const page = async ({
 
         <Filter />
 
-        <Suspense fallback={"loading..."}>
+        <Suspense fallback={<PropertyListSkeleton isGrid />}>
           <PropertyList searchParams={params} />
         </Suspense>
       </div>
