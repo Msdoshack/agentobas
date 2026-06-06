@@ -1,6 +1,7 @@
 import PageReady from "@/components/PageReady";
 import PropertyImage from "@/components/properties/imageSection";
 import PropertyDescription from "@/components/properties/PropertyDescription";
+import ShareBtn from "@/components/properties/ShareBtn";
 import VideoSection from "@/components/properties/VideoSection";
 import TransitionLink from "@/components/TransitionLink";
 import { EXTERNAL_URLS, URLS } from "@/constants/enum";
@@ -17,7 +18,7 @@ import {
 } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
+
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 
 const InfoCard = ({
@@ -33,11 +34,11 @@ const InfoCard = ({
 }) => {
   return (
     <div className="flex items-center gap-4">
-      <div className="bg-blue-100 p-3 rounded-3xl">
-        <property.Icon size={24} color="#2563eb" />
+      <div className="bg-blue-100 p-2 rounded-3xl">
+        <property.Icon size={20} color="#2563eb" />
       </div>
       <div>
-        <p className="font-bold text-xl text-gray-600">{property.value}</p>
+        <p className="font-bold sm:text-xl text-gray-600">{property.value}</p>
         <p className="text-sm text-gray-500">{property.title}</p>
       </div>
     </div>
@@ -139,7 +140,7 @@ const page = async ({
                     </span>
                   </div>
 
-                  <div className="flex gap-8 mb-8 pb-8 border-b border-gray-300 flex-wrap">
+                  <div className="flex justify-between gap-8 mb-8 pb-8 border-b border-gray-300 flex-wrap">
                     {property.beds && (
                       <InfoCard
                         property={{
@@ -169,6 +170,8 @@ const page = async ({
                         }}
                       />
                     )}
+
+                    <ShareBtn name={property?.title} />
                   </div>
 
                   {/* CONTACT AGENT */}

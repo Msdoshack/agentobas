@@ -14,7 +14,10 @@ const Logo = () => {
         : URLS.propertiesPage;
 
   return (
-    <TransitionLink href={url} className="font-extrabold text-lg">
+    <TransitionLink
+      href={url}
+      className="font-extrabold text-lg bg-linear-to-b from-amber-50 via-amber-100 to-amber-300 bg-clip-text text-transparent drop-shadow-sm"
+    >
       IG OBAS
     </TransitionLink>
   );

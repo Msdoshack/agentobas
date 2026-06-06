@@ -38,7 +38,7 @@ const MobileNavModal = ({ ref, onClose, isAuthenticated }: PropsType) => {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 w-full flex justify-end h-screen overflow-hidden z-50 bg-black/70 "
+      className="fixed   top-0 left-0 w-full flex justify-end h-screen overflow-hidden z-50 bg-black/70 "
       initial={{ x: "100%" }}
       animate={{
         x: "0",
@@ -53,7 +53,10 @@ const MobileNavModal = ({ ref, onClose, isAuthenticated }: PropsType) => {
         },
       }}
     >
-      <div ref={ref} className="w-4/8 bg-gray-900 text-white flex flex-col">
+      <div
+        ref={ref}
+        className="w-4/8  bg-banner-frame text-white flex flex-col"
+      >
         <div className="text-center p-3 bg-white text-gray-900">
           <p className="text-xl font-extrabold">IG OBAS</p>
 

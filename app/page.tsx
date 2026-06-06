@@ -1,11 +1,14 @@
 export const revalidate = 3600;
 export const dynamic = "force-static";
+
+import Dividers from "@/components/Dividers";
 import Body from "@/components/home/Body";
 import Hero from "@/components/home/Hero";
 import LandDeals from "@/components/home/LandDeals";
 import RecentListing from "@/components/home/RecentListing";
 import RecentVacancies from "@/components/home/RecentVacancies";
 import PageReady from "@/components/PageReady";
+import PromoBanner from "@/components/PromoBanner";
 import PropertyListSkeleton from "@/components/properties/PropertyListSkeleton";
 import TransitionLink from "@/components/TransitionLink";
 import {
@@ -24,7 +27,12 @@ export default function Home() {
         <main>
           <Hero />
 
-          <div className="mt-16 max-w-6xl mx-auto px-1 shadow-xl">
+          <PromoBanner
+            title="Own a Property in abraka today"
+            sub="Explore residential and commercial plots ready for immediate development and homes, aparments and shops for sale and rent"
+          />
+
+          <div className=" max-w-6xl mx-auto px-1 shadow-xl">
             <div className="flex items-center justify-between mb-4 px-1">
               <h3 className="font-medium sm:text-xl text-gray-700 ">
                 Recent Listing
@@ -41,7 +49,14 @@ export default function Home() {
             </Suspense>
           </div>
 
-          <div className="mt-16 max-w-6xl mx-auto px-1 shadow-xl">
+          <Dividers
+            linkTitle="    Explore land deals"
+            link={`${URLS.propertiesPage}?${PROPERTY_FILTER_ENUM.CATEGORY}=land`}
+            title="Premium Land, Prime Locations"
+            sub="Discover verified plots with exceptional investment yields. Secure your future today"
+          />
+
+          <div className="max-w-6xl mx-auto px-1 shadow-xl">
             <div className="flex items-center justify-between mb-4 px-1">
               <h3 className="font-medium  text-gray-700 ">Land Deals</h3>
               <TransitionLink
@@ -57,7 +72,14 @@ export default function Home() {
             </Suspense>
           </div>
 
-          <div className="mt-16 max-w-6xl mx-auto px-1 shadow-xl">
+          <Dividers
+            title="Find Your Next Home"
+            sub="Inspect fully vetted apartments and bedsitters with transparent pricing and clear utility setups"
+            linkTitle="Explore houses"
+            link={`${URLS.propertiesPage}?${PROPERTY_FILTER_ENUM.CATEGORY}=house`}
+          />
+
+          <div className=" max-w-6xl mx-auto px-1 shadow-xl">
             <div className="flex items-center justify-between mb-4 px-1">
               <h3 className="font-medium  text-gray-700 ">Recent Vacancies</h3>
               <TransitionLink

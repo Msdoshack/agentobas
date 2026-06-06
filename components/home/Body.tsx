@@ -1,6 +1,7 @@
 import { EXTERNAL_URLS } from "@/constants/enum";
 import { Phone } from "lucide-react";
 import Image from "next/image";
+import { AgentDivider } from "../AgentDivider";
 
 const Card = ({
   title,
@@ -142,7 +143,9 @@ const Body = () => {
         </div>
       </div>
 
-      <div className="bg-linear-to-r from-gray-900 to-gray-950 text-white my-24 lg:my-32 px-6 py-12 mx-2 relative">
+      <AgentDivider />
+
+      <div className="bg-linear-to-r from-gray-900 to-gray-950 text-white mb-24 lg:mb-32 px-6 py-12 mx-2 relative">
         <Image
           src={"/home-image-800.webp"}
           className="opacity-10 object-cover"

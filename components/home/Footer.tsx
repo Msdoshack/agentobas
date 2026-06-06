@@ -80,10 +80,13 @@ const contact = [
 
 const Footer = () => {
   return (
-    <div className="p-5 py-16 bg-slate-900 text-white">
+    <div className=" relative p-5 py-16 bg-slate-900 bg-banner-frame text-white">
+      <div className="absolute inset-0 bg-radial from-transparent via-black/10 to-black/50 pointer-events-none" />
       <div className="max-w-7xl mx-auto">
         <div>
-          <h4 className="font-extrabold text-lg">IG OBAS</h4>
+          <h4 className="font-extrabold text-lg bg-linear-to-b from-amber-50 via-amber-100 to-amber-300 bg-clip-text text-transparent drop-shadow-sm">
+            IG OBAS
+          </h4>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-y-12 mt-8">
@@ -100,7 +103,11 @@ const Footer = () => {
               Quick Links
             </h1>
             {footerMenu.map((item) => (
-              <TransitionLink href={item.url} key={item.id} className="text-sm">
+              <TransitionLink
+                href={item.url}
+                key={item.id}
+                className="text-sm "
+              >
                 {item.title}
               </TransitionLink>
             ))}
