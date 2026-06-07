@@ -28,8 +28,8 @@ export default function Home() {
           <Hero />
 
           <PromoBanner
-            title="Own a Property in abraka today"
-            sub="Explore residential and commercial plots ready for immediate development and homes, aparments and shops for sale and rent"
+            title="premium Properties in abraka"
+            sub="Explore available homes, apartments and shops and residential / commercial plots ready for immediate development."
           />
 
           <div className=" max-w-6xl mx-auto px-1 shadow-xl">
@@ -52,6 +52,7 @@ export default function Home() {
           <Dividers
             linkTitle="    Explore land deals"
             link={`${URLS.propertiesPage}?${PROPERTY_FILTER_ENUM.CATEGORY}=land`}
+            img="/land.jpeg"
             title="Premium Land, Prime Locations"
             sub="Discover verified plots with exceptional investment yields. Secure your future today"
           />
@@ -76,6 +77,7 @@ export default function Home() {
             title="Find Your Next Home"
             sub="Inspect fully vetted apartments and bedsitters with transparent pricing and clear utility setups"
             linkTitle="Explore houses"
+            img="/home-image-800.webp"
             link={`${URLS.propertiesPage}?${PROPERTY_FILTER_ENUM.CATEGORY}=house`}
           />
 

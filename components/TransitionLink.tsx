@@ -37,31 +37,3 @@ export default function TransitionLink({ href, children, className }: Props) {
     </Link>
   );
 }
-
-// export default function TransitionLink({ href, children, className }: Props) {
-//   const router = useRouter();
-
-//   const [isPending, startTransition] = useTransition();
-
-//   const { startClosing } = usePageTransition();
-
-//   function handleClick(e: React.MouseEvent<HTMLAnchorElement>) {
-//     e.preventDefault();
-
-//     // close door immediately
-//     startClosing();
-
-//     // navigation starts immediately too
-//     startTransition(() => {
-//       router.push(href);
-//     });
-//   }
-
-//   return (
-//     <Link href={href} className={className} onClick={handleClick}>
-//       {children}
-//     </Link>
-//   );
-// }
-
-// TransitionLink.tsx

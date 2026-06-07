@@ -159,7 +159,7 @@ const Body = () => {
           </h3>
           <div className="flex flex-col md:flex-row gap-5">
             <div className="w-full md:w-1/2 order-2 md:order-1 ">
-              <p className="text-start px-4 text-base leading-10">
+              <p className="text-start  text-base leading-10">
                 I&apos;m <strong>Ichani Gift Obas, </strong> a passionate real
                 estate agent who believes that property ownership should be
                 simple, transparent, and rewarding. I work closely with my

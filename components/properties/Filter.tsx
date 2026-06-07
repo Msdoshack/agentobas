@@ -63,7 +63,7 @@ const FilterInner = () => {
               key={type.id}
               onClick={() => handleType(type.name as PROPERTY_TYPE_ENUM)}
               className={cn(
-                "py-3 px-6 rounded-md font-semibold border-none transition-all cursor-pointer",
+                "py-3 px-6 rounded-md font-semibold border-none transition-all cursor-pointer hover:bg-linear-to-r hover:from-[#2563eb] hover:to-[#1d4ed8] hover:text-white duration-200",
                 filterType === type.name
                   ? "bg-linear-to-r from-[#2563eb] to-[#1d4ed8] text-white shadow-lg"
                   : "bg-white text-neutral-600",

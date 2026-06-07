@@ -1,7 +1,6 @@
 import { URLS } from "@/constants/enum";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 type PropsType = {
   title: string;
@@ -10,11 +9,11 @@ type PropsType = {
 
 const PromoBanner = ({ title, sub }: PropsType) => {
   return (
-    <div className="relative bg-banner-frame  w-full max-w-6xl mx-auto my-5 text-white px-1.5">
+    <div className="relative bg-banner-frame  w-full max-w-6xl mx-auto my-5 text-white">
       <div className="absolute inset-0 bg-radial from-transparent via-black/10 to-black/50 pointer-events-none" />
 
       <div className="flex justify-center gap-1 sm:gap-5 md:gap-32 w-full">
-        <div className="flex flex-col  gap-4 py-5">
+        <div className="flex flex-col  gap-4 py-5 pl-1.5">
           <h1 className="font-bold text-xs sm:text-base md:text-xl sm:tracking-wider uppercase bg-linear-to-b from-amber-50 via-amber-100 to-amber-300 bg-clip-text text-transparent drop-shadow-sm">
             {title}
           </h1>
@@ -22,7 +21,7 @@ const PromoBanner = ({ title, sub }: PropsType) => {
             {sub}
           </p>
           <Link
-            className="rounded-full bg-amber-100 uppercase text-[8px] sm:text-xs font-m p-2 text-black self-center"
+            className="rounded-full bg-amber-100 uppercase text-[10px] sm:text-xs font-m p-2 text-black self-center"
             href={URLS.propertiesPage}
           >
             Explore All
