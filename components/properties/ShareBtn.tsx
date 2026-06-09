@@ -30,8 +30,9 @@ const ShareBtn = ({ name }: PropsType) => {
   };
 
   // Pre-encode text and URLs for safe sharing
-  const shareText = encodeURIComponent(`Check out ${name}: ${currentUrl}`);
   const encodedUrl = encodeURIComponent(currentUrl);
+
+  const shareText = encodeURIComponent(`${name}: ${currentUrl}`);
 
   return (
     <div className="p-2 flex flex-col items-center gap-4">
