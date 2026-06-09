@@ -5,6 +5,7 @@ import { RefObject, useTransition } from "react";
 import { motion } from "motion/react";
 // Import your layout context hook
 import { usePageTransition } from "@/app/Providers/TransitionProvider";
+import { cn } from "@/lib/utils";
 
 type PropsType = {
   ref: RefObject<HTMLDivElement | null>;
@@ -68,7 +69,10 @@ const MobileNavModal = ({ ref, onClose, isAuthenticated }: PropsType) => {
             key={item.id}
             // Swap to use the new wrapped transitions router handler
             onClick={() => handleNavClick(item.url)}
-            className="p-5 hover:bg-gray-900 hover:text-white hover:font-medium text-center border-b cursor-pointer"
+            className={cn(
+              "p-5 hover:bg-gray-900  hover:font-medium text-center border-b cursor-pointer hover:text-amber-200",
+              pathname == item.url && "bg-gray-900 text-amber-200",
+            )}
           >
             {item.name}
           </p>

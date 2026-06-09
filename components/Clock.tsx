@@ -19,7 +19,7 @@ const Clock = () => {
   const displaySeconds = String(time.getSeconds()).padStart(2, "0");
 
   return (
-    <div className="font-mono font-extrabold text-xl flex gap-1 items-center text-amber-500">
+    <div className="font-mono font-extrabold text-xl flex gap-1 items-center text-amber-100">
       <span>{displayHours}</span>:<span>{displayMinutes}</span>:
       <span>{displaySeconds}</span>
       <span className="ml-1">{ampm}</span>

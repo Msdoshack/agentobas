@@ -1,6 +1,6 @@
 import { URLS } from "@/constants/enum";
 import Image from "next/image";
-import Link from "next/link";
+import TransitionLink from "./TransitionLink";
 
 type PropsType = {
   title: string;
@@ -9,7 +9,7 @@ type PropsType = {
 
 const PromoBanner = ({ title, sub }: PropsType) => {
   return (
-    <div className="relative bg-banner-frame  w-full max-w-6xl mx-auto my-5 text-white">
+    <div className="relative bg-banner-frame  w-full  mx-auto mb-16 text-white">
       <div className="absolute inset-0 bg-radial from-transparent via-black/10 to-black/50 pointer-events-none" />
 
       <div className="flex justify-center gap-1 sm:gap-5 md:gap-32 w-full">
@@ -20,12 +20,12 @@ const PromoBanner = ({ title, sub }: PropsType) => {
           <p className="text-[10px] sm:text-sm max-w-sm bg-linear-to-b from-amber-50 via-amber-100 to-amber-300 bg-clip-text text-transparent drop-shadow-sm">
             {sub}
           </p>
-          <Link
+          <TransitionLink
             className="rounded-full bg-amber-100 uppercase text-[10px] sm:text-xs font-m p-2 text-black self-center"
             href={URLS.propertiesPage}
           >
             Explore All
-          </Link>
+          </TransitionLink>
         </div>
 
         <div className="w-44 h-40 md:w-64 md:h-48 rounded-xl overflow-hidden shadow-md shrink-0">

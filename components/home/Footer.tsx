@@ -1,9 +1,4 @@
-import {
-  EXTERNAL_URLS,
-  PROPERTY_CATEGORY_ENUM,
-  PROPERTY_TYPE_ENUM,
-  URLS,
-} from "@/constants/enum";
+import { EXTERNAL_URLS, PROPERTY_CATEGORY_ENUM, URLS } from "@/constants/enum";
 import Image from "next/image";
 
 import Calendar from "react-calendar";
@@ -106,7 +101,7 @@ const Footer = () => {
               <TransitionLink
                 href={item.url}
                 key={item.id}
-                className="text-sm "
+                className="text-sm hover:text-amber-100 "
               >
                 {item.title}
               </TransitionLink>
@@ -118,7 +113,11 @@ const Footer = () => {
               Properties
             </h1>
             {quickLinksMenu.map((item) => (
-              <TransitionLink href={item.url} key={item.id} className="text-sm">
+              <TransitionLink
+                href={item.url}
+                key={item.id}
+                className="text-sm hover:text-amber-200"
+              >
                 {item.title}
               </TransitionLink>
             ))}

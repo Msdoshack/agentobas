@@ -3,6 +3,7 @@ import Logo from "./home/Logo";
 import { navDesktopMenu } from "@/constants";
 import { cookies } from "next/headers";
 import TransitionLink from "./TransitionLink";
+
 const Navbar = async () => {
   const cookieStore = await cookies();
   const authToken = cookieStore.get("auth_token")?.value;
@@ -20,7 +21,7 @@ const Navbar = async () => {
         <div className=" hidden md:flex text-base items-center gap-6">
           {navDesktopMenu.map((item) => (
             <TransitionLink
-              className="hover:bg-white hover:text-gray-900 px-2 py-1.5 rounded-md transition-all duration-300"
+              className="hover:bg-amber-100 hover:text-gray-900 px-2 py-1.5 rounded-md transition-all duration-300"
               key={item.id}
               href={item.url}
             >

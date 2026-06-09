@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import TransitionLink from "./TransitionLink";
 
 type PropsType = {
   title: string;
@@ -22,12 +22,12 @@ const Dividers = ({ title, sub, linkTitle, link, img }: PropsType) => {
           <p className="text-[10px] sm:text-sm max-w-sm bg-linear-to-b from-amber-50 via-amber-100 to-amber-300 bg-clip-text text-transparent drop-shadow-sm">
             {sub}
           </p>
-          <Link
+          <TransitionLink
             className="rounded-full uppercase text-[10px] sm:text-xs p-2 animate-pulse bg-amber-100 self-center font-medium"
             href={link}
           >
             {linkTitle}
-          </Link>
+          </TransitionLink>
         </div>
 
         <div className="relative w-44 h-36 md:w-64 md:h-44 rounded-xl overflow-hidden shadow-md shrink-0">
