@@ -1,6 +1,5 @@
 export const revalidate = 86400;
 export const dynamic = "force-static";
-
 import Body from "@/components/home/Body";
 import Hero from "@/components/home/Hero";
 import LandDeals from "@/components/home/LandDeals";
@@ -47,3 +46,19 @@ export default function Home() {
     </>
   );
 }
+
+//  <Dividers
+//    linkTitle="    Explore land deals"
+//    link={`${URLS.propertiesPage}?${PROPERTY_FILTER_ENUM.CATEGORY}=land`}
+//    img="/land.jpeg"
+//    title="Premium Land, Prime Locations"
+//    sub="Discover verified plots with exceptional investment yields. Secure your future today"
+//  />;
+
+// <Dividers
+//       title="Find Your Next Home"
+//       sub="Inspect fully vetted apartments and bedsitters with transparent pricing and clear utility setups"
+//       linkTitle="Explore houses"
+//       img="/home-image-800.webp"
+//       link={`${URLS.propertiesPage}?${PROPERTY_FILTER_ENUM.CATEGORY}=house`}
+//     />

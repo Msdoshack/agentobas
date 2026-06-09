@@ -63,7 +63,7 @@ const PropertyCard = ({ property, isGrid = true }: PropsType) => {
           </h3>
 
           <div className="my-1">
-            <span className="bg-gray-100 rounded-md px-2 py-0.5 text-xs  text-gray-700 w-fit border capitalize">
+            <span className="bg-gray-100 rounded-md px-2 py-0.5 text-xs  text-gray-700 w-fit border border-gray-200 capitalize">
               {property.category.name}
             </span>
             <span className="text-sm text-gray-500">

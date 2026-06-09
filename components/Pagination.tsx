@@ -65,7 +65,7 @@ const PaginationInner = ({ metadata }: PropsType) => {
           onClick={() => navigateToPage(currentPage - 1)}
           variant="outline"
           size="sm"
-          className="brand-color font-medium cursor-pointer"
+          className="font-medium cursor-pointer"
         >
           Prev
         </Button>

@@ -1,7 +1,8 @@
-import { EXTERNAL_URLS } from "@/constants/enum";
+import { EXTERNAL_URLS, PROPERTY_FILTER_ENUM, URLS } from "@/constants/enum";
 import { Phone } from "lucide-react";
 import Image from "next/image";
 import { AgentDivider } from "../AgentDivider";
+import Dividers from "../Dividers";
 
 const Card = ({
   title,
@@ -43,9 +44,6 @@ const Body = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-2 xl:px-0">
         <div className="order-2 sm:order-1 flex flex-col justify-between gap-4 ">
-          {/* <h4 className="font-semibold text-2xl sm:3xl lg:text-4xl">
-            Dedicated to the joy of home
-          </h4> */}
           <p className="text-justify leading-9">
             Since 2020, <strong>IG OBAS Estate Agent</strong> has helped
             countless families discover the joys of homeownership. In the
@@ -58,13 +56,6 @@ const Body = () => {
             blueprint. Let us navigate the complexities of the real estate
             market for you, ensuring your next move is your best move.
           </p>
-          {/* <p className="text-justify leading-10">
-            Since 2020 <strong>IG OBAS</strong> Estate Agent has helped
-            countless families discover the joys of homeownership. In the
-            process, we built a reputation as the most respected brand in the
-            industry.1 So when it comes to buying or selling a place as
-            important as home, put your trust in a name trusted by millions.
-          </p> */}
         </div>
         <div className="relative h-80 order-1 sm:order-2">
           <Image
@@ -75,6 +66,14 @@ const Body = () => {
           />
         </div>
       </div>
+
+      <Dividers
+        title="Find Your Next Home"
+        sub="Inspect fully vetted apartments and bedsitters with transparent pricing and clear utility setups"
+        linkTitle="Explore houses"
+        img="/home-image-800.webp"
+        link={`${URLS.propertiesPage}?${PROPERTY_FILTER_ENUM.CATEGORY}=house`}
+      />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 gap-y-16 mt-24 lg:mt-32">
         <Card
@@ -87,6 +86,7 @@ const Body = () => {
           body="When it comes to selling your home, exposure matters. As the most recognized name in real estate, IG OBAS network can help you get the most value and exposure for your home."
           img="/sell.webp"
         />
+
         <Card
           title="Buying your next Land"
           body="When it comes to selling your home, exposure matters. As the most recognized name in real estate, IG OBAS network can help you get the most value and exposure for your home."
@@ -98,6 +98,14 @@ const Body = () => {
           img="/land2.webp"
         />
       </div>
+
+      <Dividers
+        linkTitle="    Explore land deals"
+        link={`${URLS.propertiesPage}?${PROPERTY_FILTER_ENUM.CATEGORY}=land`}
+        img="/land.jpeg"
+        title="Premium Land, Prime Locations"
+        sub="Discover verified plots with exceptional investment yields. Secure your future today"
+      />
 
       <h4
         className="font-semibold text-2xl lg:3xl  mt-24 lg:mt-32 mb-4 px-4 xl:px-0 text-center md:text-start"
@@ -182,7 +190,6 @@ const Body = () => {
           </div>
         </div>
       </div>
-
       <div className="bg-slate-900 text-white my-16 px-6 py-12 mx-2 relative">
         <Image
           src={"/home-image-800.webp"}

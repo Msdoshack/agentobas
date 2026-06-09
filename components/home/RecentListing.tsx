@@ -20,7 +20,7 @@ const RecentListing = async () => {
             </h3>
             <TransitionLink
               href={URLS.propertiesPage}
-              className=" text-gray-700 text-sm"
+              className=" text-gray-700 text-sm hover:text-blue-500 transition-colors"
             >
               View all
             </TransitionLink>
