@@ -16,7 +16,7 @@ const RecentListing = async () => {
         <div className=" max-w-6xl mx-auto px-1 shadow-xl">
           <div className="flex items-center justify-between mb-4 px-1">
             <h3 className="font-medium sm:text-xl text-gray-700 ">
-              Recent Listing
+              Recent Listings
             </h3>
             <TransitionLink
               href={URLS.propertiesPage}

@@ -2,6 +2,7 @@ export const revalidate = 86400;
 export const dynamic = "force-static";
 import Body from "@/components/home/Body";
 import Hero from "@/components/home/Hero";
+import HomesForSale from "@/components/home/HomesForSale";
 import LandDeals from "@/components/home/LandDeals";
 import RecentListing from "@/components/home/RecentListing";
 import RecentVacancies from "@/components/home/RecentVacancies";
@@ -38,6 +39,11 @@ export default function Home() {
           {/* Recent Vacancies */}
           <Suspense fallback={<PropertyListSkeleton isGrid={false} />}>
             <RecentVacancies />
+          </Suspense>
+
+          {/* Homes for sale */}
+          <Suspense fallback={<PropertyListSkeleton isGrid={false} />}>
+            <HomesForSale />
           </Suspense>
 
           <Body />
