@@ -122,8 +122,6 @@
   }
 }
 
-@import "tailwindcss";
-
 @theme {
   /* Typewriter Cursor Blink */
   --animate-blink: blink 1s infinite;

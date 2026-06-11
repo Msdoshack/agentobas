@@ -1,6 +1,5 @@
 "use client";
 
-import DoorComponent from "@/components/DoorComponent";
 import { usePageTransition } from "@/app/Providers/TransitionProvider";
 import UpdatedDoorComponent from "./UpdatedDoor";
 
