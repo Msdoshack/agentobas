@@ -11,7 +11,6 @@ import Link from "next/link";
 import SignoutButton from "./SignoutButton";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import TransitionLink from "../TransitionLink";
 
 const SideBar = () => {
   const href = usePathname();
@@ -31,12 +30,12 @@ const SideBar = () => {
           href == "/admin" && "bg-slate-50",
         )}
       >
-        <TransitionLink
+        <Link
           className="flex items-center gap-4 text-base"
           href={URLS.adminPage}
         >
           <Landmark size={18} /> Dashboard
-        </TransitionLink>
+        </Link>
       </div>
 
       {adminNavMenu.map((menu) => (
@@ -56,7 +55,7 @@ const SideBar = () => {
 
           <CollapsibleContent className="flex flex-col">
             {menu.children.map((item) => (
-              <TransitionLink
+              <Link
                 key={item.id}
                 href={item.href}
                 className={cn(
@@ -66,7 +65,7 @@ const SideBar = () => {
               >
                 <item.icon size={18} />
                 {item.name}
-              </TransitionLink>
+              </Link>
             ))}
           </CollapsibleContent>
         </Collapsible>

@@ -147,8 +147,6 @@
   }
 }
 
-@import "tailwindcss";
-
 @utility bg-luxury-gold {
   /* Match the exact deep midnight navy base from your header/footer */
   background-color: #0b132a;
