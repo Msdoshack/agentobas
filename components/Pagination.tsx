@@ -65,7 +65,7 @@ const PaginationInner = ({ metadata }: PropsType) => {
           onClick={() => navigateToPage(currentPage - 1)}
           variant="outline"
           size="sm"
-          className="font-medium cursor-pointer"
+          className="font-medium cursor-pointer border-gray-300"
         >
           Prev
         </Button>
@@ -77,7 +77,7 @@ const PaginationInner = ({ metadata }: PropsType) => {
               size="sm"
               variant="outline"
               onClick={() => navigateToPage(1)}
-              className="cursor-pointer"
+              className="cursor-pointer border-gray-300"
             >
               1
             </Button>
@@ -97,7 +97,7 @@ const PaginationInner = ({ metadata }: PropsType) => {
             variant="outline"
             onClick={() => navigateToPage(p)}
             className={cn(
-              "font-medium transition-all duration-200 cursor-pointer min-w-9",
+              "font-medium transition-all duration-200 cursor-pointer min-w-9 hover:bg-blue-600 hover:text-white border-gray-300",
               currentPage === p &&
                 "bg-blue-600 text-white hover:bg-blue-700 hover:text-white border-blue-600 shadow-xs",
             )}
@@ -131,7 +131,7 @@ const PaginationInner = ({ metadata }: PropsType) => {
           onClick={() => navigateToPage(currentPage + 1)}
           variant="outline"
           size="sm"
-          className="brand-color font-medium cursor-pointer"
+          className="font-medium cursor-pointer border-gray-300 hover:bg-blue-600 hover:text-white"
         >
           Next
         </Button>
